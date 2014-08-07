@@ -64,5 +64,9 @@ module Momo
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Load new other modules
+    # config.autoload_paths += ["#{config.root}/app/services"]
+
   end
 end
