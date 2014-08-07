@@ -4,4 +4,6 @@ class Person < Entity
   field :lastname, type: String
   field :age, type: Integer
 
+  has_many :animes
+  has_many :mangas
 end

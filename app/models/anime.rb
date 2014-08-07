@@ -15,16 +15,16 @@ class Anime
   field :episodes, type: Integer
   field :manga, type: Manga
 
-  # field :licenses, type: String
-  # field :films, type: Entity
+  field :licenses, type: String
+  field :films, type: Entity
 
 
-  belongs_to :director, :class_name => :Person
+  belongs_to :director, :class_name => "Person"
   belongs_to :studio
   belongs_to :network
-  belongs_to :english_network
+  belongs_to :english_network, :class_name => "Network"
   belongs_to :manga
-  has_many :licenses, :class_name => :Producer
-  has_many :films, :class_name => :Entity
-  has_many :episodes
+  has_many :licenses, :class_name => "Producer"
+  has_many :films, :class_name => "Entity"
+  # has_many :episodes
 end
