@@ -1,4 +1,22 @@
-MyApi::Application.routes.draw do
+Momo::Application.routes.draw do
+  resources :animes, except: [:new, :edit]
+
+  resources :studios, except: [:new, :edit]
+
+  resources :producers, except: [:new, :edit]
+
+  resources :networks, except: [:new, :edit]
+
+  resources :mangas, except: [:new, :edit]
+
+  resources :episodes, except: [:new, :edit]
+
+  resources :people, except: [:new, :edit]
+
+  resources :genres, except: [:new, :edit]
+
+  resources :entities, except: [:new, :edit]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

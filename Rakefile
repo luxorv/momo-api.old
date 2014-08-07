@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-MyApi::Application.load_tasks
+Momo::Application.load_tasks

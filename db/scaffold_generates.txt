@@ -1,0 +1,3 @@
+
+# Generate Anime
+rails generate scaffold anime director:Person studio:Studio network:Network english_network:Network start_run_date:Date end_run_date:Date episodes:Integer manga:Manga
