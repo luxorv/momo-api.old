@@ -2,6 +2,7 @@
 # Anime: Contains Information on Anime as appears on WikiPedia.
 # Properties: :Director, :genres(genre array), :studio, :licenses(company that licensed array), :network,
 # :english_network, :start_run_date, :end_run_date, :episodes, :manga, :film
+# search_in :brand, :name, :tags => :name, :category => :name, :info => [:summary, :description]
 #
 
 class Anime
@@ -27,4 +28,6 @@ class Anime
   has_many :licenses, :class_name => "Producer"
   has_many :films, :class_name => "Entity"
   # has_many :episodes
+
+  search :user => :name
 end

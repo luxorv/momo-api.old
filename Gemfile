@@ -9,9 +9,11 @@ gem 'rails', '3.2.13'
 gem 'rails-api'
 
 gem 'mongoid'
-gem 'sqlite3'
-gem 'pry-rails'
 
+gem 'mongoid_search'
+gem 'sqlite3'
+
+gem 'pry-rails'
 # For Fixtures and testing
 
 group :development, :test do

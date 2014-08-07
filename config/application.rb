@@ -67,6 +67,5 @@ module Momo
 
     # Load new other modules
     # config.autoload_paths += ["#{config.root}/app/services"]
-
   end
 end
