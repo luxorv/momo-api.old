@@ -1,4 +1,10 @@
 Momo::Application.routes.draw do
+  resources :studios, except: [:new, :edit]
+
+  resources :producers, except: [:new, :edit]
+
+  resources :networks, except: [:new, :edit]
+
   resources :mangas, except: [:new, :edit]
 
   resources :episodes, except: [:new, :edit]

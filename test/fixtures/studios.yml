@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  industry: MyString
+  website: MyString
+  founded: 2014-08-07
+
+two:
+  industry: MyString
+  website: MyString
+  founded: 2014-08-07
