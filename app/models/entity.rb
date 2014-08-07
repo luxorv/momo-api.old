@@ -6,4 +6,9 @@ class Entity
 
 
   scope :films, where(entity_type: :film)
+
+  before_create :set_entity_type
+  def set_entity_type
+    self.entity_type = self.class.name
+  end
 end

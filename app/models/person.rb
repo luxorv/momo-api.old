@@ -3,4 +3,5 @@ class Person < Entity
 
   field :lastname, type: String
   field :age, type: Integer
+
 end
