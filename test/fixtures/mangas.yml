@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  writer: 
+  publisher: 
+  english_publisher: 
+  magazine: 
+  start_run_date: 2014-08-07
+  end_run_date: 2014-08-07
+  volumes: 1
+
+two:
+  writer: 
+  publisher: 
+  english_publisher: 
+  magazine: 
+  start_run_date: 2014-08-07
+  end_run_date: 2014-08-07
+  volumes: 1

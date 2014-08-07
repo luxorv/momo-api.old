@@ -1,4 +1,14 @@
 Momo::Application.routes.draw do
+  resources :mangas, except: [:new, :edit]
+
+  resources :episodes, except: [:new, :edit]
+
+  resources :animes, except: [:new, :edit]
+
+  resources :people, except: [:new, :edit]
+
+  resources :genres, except: [:new, :edit]
+
   resources :entities, except: [:new, :edit]
 
   # The priority is based upon order of creation:
