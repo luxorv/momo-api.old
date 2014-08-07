@@ -1,4 +1,6 @@
-MyApi::Application.routes.draw do
+Momo::Application.routes.draw do
+  resources :entities, except: [:new, :edit]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
