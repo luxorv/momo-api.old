@@ -11,7 +11,7 @@ gem 'rails-api'
 gem 'mongoid'
 gem 'sqlite3'
 
-
+gem 'pry'
 
 
 # To use ActiveModel has_secure_password
