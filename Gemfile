@@ -10,7 +10,7 @@ gem 'rails-api'
 
 gem 'mongoid'
 gem 'sqlite3'
-gem 'pry'
+gem 'pry-rails'
 
 # For Fixtures and testing
 
