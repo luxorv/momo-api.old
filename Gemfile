@@ -11,8 +11,12 @@ gem 'rails-api'
 gem 'mongoid'
 gem 'sqlite3'
 
+# For Fixtures and testing
 
-
+group :development, :test do
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'rspec-rails', '~> 3.0.0'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

@@ -4,18 +4,18 @@
 # :english_network, :start_run_date, :end_run_date, :episodes, :manga, :film
 #
 
-class Anime < Entity
+class Anime
   include Mongoid::Document
-
   field :director, type: Person
   field :studio, type: Studio
-  # field :licenses, type: String
   field :network, type: Network
   field :english_network, type: Network
   field :start_run_date, type: Date
   field :end_run_date, type: Date
   field :episodes, type: Integer
   field :manga, type: Manga
+
+  # field :licenses, type: String
   # field :films, type: Entity
 
 

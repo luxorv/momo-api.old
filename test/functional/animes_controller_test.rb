@@ -13,7 +13,7 @@ class AnimesControllerTest < ActionController::TestCase
 
   test "should create anime" do
     assert_difference('Anime.count') do
-      post :create, anime: { director: @anime.director, end_run_date: @anime.end_run_date, english_network: @anime.english_network, episodes: @anime.episodes, film: @anime.film, licenses: @anime.licenses, manga: @anime.manga, network: @anime.network, start_run_date: @anime.start_run_date, studio: @anime.studio }
+      post :create, anime: { director: @anime.director, end_run_date: @anime.end_run_date, english_network: @anime.english_network, episodes: @anime.episodes, manga: @anime.manga, network: @anime.network, start_run_date: @anime.start_run_date, studio: @anime.studio }
     end
 
     assert_response 201
@@ -25,7 +25,7 @@ class AnimesControllerTest < ActionController::TestCase
   end
 
   test "should update anime" do
-    put :update, id: @anime, anime: { director: @anime.director, end_run_date: @anime.end_run_date, english_network: @anime.english_network, episodes: @anime.episodes, film: @anime.film, licenses: @anime.licenses, manga: @anime.manga, network: @anime.network, start_run_date: @anime.start_run_date, studio: @anime.studio }
+    put :update, id: @anime, anime: { director: @anime.director, end_run_date: @anime.end_run_date, english_network: @anime.english_network, episodes: @anime.episodes, manga: @anime.manga, network: @anime.network, start_run_date: @anime.start_run_date, studio: @anime.studio }
     assert_response 204
   end
 

@@ -1,4 +1,6 @@
 Momo::Application.routes.draw do
+  resources :animes, except: [:new, :edit]
+
   resources :studios, except: [:new, :edit]
 
   resources :producers, except: [:new, :edit]
@@ -8,8 +10,6 @@ Momo::Application.routes.draw do
   resources :mangas, except: [:new, :edit]
 
   resources :episodes, except: [:new, :edit]
-
-  resources :animes, except: [:new, :edit]
 
   resources :people, except: [:new, :edit]
 
