@@ -1,4 +1,4 @@
 Momo-api
 ========
 
-Momo API official repository
+This is the official API for the momo application family.
