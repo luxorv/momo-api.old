@@ -1,4 +1,5 @@
 Momo::Application.routes.draw do
+
   resources :animes, except: [:new, :edit]
 
   resources :studios, except: [:new, :edit]

@@ -10,7 +10,9 @@ class AnimesController < ApplicationController
   # GET /animes/1
   # GET /animes/1.json
   def show
-    @anime = Anime.find(params[:id])
+    @anime = Finder.anime_by_name params[:search]
+
+    binding.pry
 
     render json: @anime
   end

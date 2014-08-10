@@ -7,6 +7,8 @@
 
 class Anime
   include Mongoid::Document
+  include Mongoid::Search
+
   field :director, type: Person
   field :studio, type: Studio
   field :network, type: Network
@@ -29,5 +31,5 @@ class Anime
   has_many :films, :class_name => "Entity"
   # has_many :episodes
 
-  search :user => :name
+  search :name
 end

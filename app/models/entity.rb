@@ -1,5 +1,7 @@
 class Entity
   include Mongoid::Document
+  include Mongoid::Search
+
   field :name, type: String
   field :entity_type, type: String
   field :description, type: String

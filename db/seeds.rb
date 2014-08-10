@@ -26,12 +26,29 @@ publisher.save
 engish_publisher.save
 magazine.save
 
-manga = Manga.create(name: :Gantz,english_publisher:engish_publisher, writer: writer, publisher: publisher, magazine: magazine,start_run_date: Date.today.mongoize, end_run_date: Date.today.mongoize,volumes: 5)
+manga = Manga.create(
+  name: :Gantz,
+  english_publisher:engish_publisher,
+  writer: writer,
+  publisher: publisher,
+  magazine: magazine,
+  start_run_date: Date.today.mongoize,
+  end_run_date: Date.today.mongoize,
+  volumes: 5
+)
 
 manga.save
 
-anime = Anime.create(director: director, studio: studio, network: network,
-    english_network: e_network, start_run_date: Date.today.mongoize, end_run_date: Date.today.mongoize,
-    episode: 24, manga: manga)
+anime = Anime.create(
+  name: :Gantz,
+  director: director,
+  studio: studio,
+  network: network,
+  english_network: e_network,
+  start_run_date: Date.today.mongoize,
+  end_run_date: Date.today.mongoize,
+  episode: 24,
+  manga: manga
+)
 
 anime.save
