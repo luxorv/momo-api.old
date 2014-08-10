@@ -5,12 +5,14 @@
 
   Uses: x class.
 
+  - This class will be injected in show method for all controllers.
+  - Redirect GET method controllers to Kiwi Module
+
 =end
 
 class KiWi
 
-  def self.anime_with_name_like name
-    anime = Anime.all.where(name: name)
-    anime
+  def self.show_anime id
+    Anime.find(id)
   end
 end

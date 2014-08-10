@@ -8,6 +8,6 @@
 class Finder
 
   def self.anime_by_name name
-    KiWi.anime_with_name_like name
+    # KiWi.anime_with_name_like name
   end
 end
