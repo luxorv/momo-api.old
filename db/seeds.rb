@@ -47,8 +47,21 @@ anime = Anime.create({
   english_network: e_network,
   start_run_date: Date.today.mongoize,
   end_run_date: Date.today.mongoize,
-  episode: 24,
   manga: manga
 })
 
 anime.save
+
+episode = Episode.create({
+                             name: "Pilot",
+    number: 1,
+    type: "NAE",
+    synopsis: "Pilot episode",
+    length: Time.now,
+    urls: "http://www.google.com",
+    release_date: Date.today.mongoize,
+    season: 1,
+    popularity: 100,
+    anime: anime})
+
+episode.save
