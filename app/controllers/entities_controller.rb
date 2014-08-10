@@ -10,7 +10,7 @@ class EntitiesController < ApplicationController
   # GET /entities/1
   # GET /entities/1.json
   def show
-    @entity = Entity.find(params[:id])
+    @entity = KiWi.show_entity params[:id]
 
     render json: @entity
   end

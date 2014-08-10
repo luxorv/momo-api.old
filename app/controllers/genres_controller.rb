@@ -10,7 +10,7 @@ class GenresController < ApplicationController
   # GET /genres/1
   # GET /genres/1.json
   def show
-    @genre = Genre.find(params[:id])
+    @genre = KiWi.show_genre params[:id]
 
     render json: @genre
   end

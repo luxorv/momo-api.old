@@ -10,7 +10,7 @@ class StudiosController < ApplicationController
   # GET /studios/1
   # GET /studios/1.json
   def show
-    @studio = Studio.find(params[:id])
+    @studio = KiWi.show_studio params[:id]
 
     render json: @studio
   end

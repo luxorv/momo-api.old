@@ -1,7 +1,7 @@
 development:
   sessions:
     default:
-      database: my_api_development
+      database: momo_development
       hosts:
         - localhost:27017
       options:
@@ -20,7 +20,7 @@ development:
 test:
   sessions:
     default:
-      database: my_api_test
+      database: momo_test
       hosts:
         - localhost:27017
       options:
