@@ -29,7 +29,7 @@ vagrant ssh -c "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
 vagrant ssh -c "git config --global color.ui true"
 vagrant ssh -c "git config --global user.name Rapito"
 vagrant ssh -c "git config --global user.email robert.abp@hotmail.com"
-vagrant ssh -c "ssh-keygen -t rsa -C rapito@gmail.com"
+vagrant ssh -c "ssh-keygen -t rsa -C robert.apb@gmail.com"
 echo "Copy your public key and paste in github!"
 vagrant ssh -c "cat ~/.ssh/id_rsa.pub"
 
