@@ -15,12 +15,11 @@ class Anime
   field :english_network, type: Network
   field :start_run_date, type: Date
   field :end_run_date, type: Date
-  field :episodes, type: Integer
+  field :episodes, type: Array
   field :manga, type: Manga
 
   field :licenses, type: String
   field :films, type: Entity
-
 
   belongs_to :director, :class_name => "Person"
   belongs_to :studio
@@ -29,6 +28,7 @@ class Anime
   belongs_to :manga
   has_many :licenses, :class_name => "Producer"
   has_many :films, :class_name => "Entity"
+  has_many :episodes
   # has_many :episodes
 
   search :name
