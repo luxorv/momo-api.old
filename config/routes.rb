@@ -19,7 +19,10 @@ Momo::Application.routes.draw do
 
   resources :otakus, only: [:index, :show]
 
-  resources :animes, except: [:new, :edit]
+  # resources :animes, except: [:new, :edit]
+  resources :animes, except: [:new, :edit] do |anime|
+    get 'search', on: :collection
+  end
 
   resources :studios, except: [:new, :edit]
 

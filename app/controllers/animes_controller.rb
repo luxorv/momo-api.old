@@ -2,7 +2,8 @@ class AnimesController < ApplicationController
   # GET /animes
   # GET /animes.json
   def index
-    @animes = Anime.all
+    # @animes = Anime.all
+    @animes = Finder.find_anime_by_name params[:search][:name]
 
     render json: @animes
   end
