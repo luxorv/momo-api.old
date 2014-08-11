@@ -11,6 +11,8 @@ class Finder
 
     if meth.to_s =~ /^find_(.+)_by_(.+)$/
       self.find_by_method($1, $2, *args, &block)
+    elsif meth.to_s =~ /^search_(.+)$/
+      self.full_search($1, *args, &block)
     else
       super
     end
@@ -27,5 +29,11 @@ class Finder
     conditions = Hash[attrs_with_args]
 
     return eval "#{model.capitalize}.where(#{conditions})"
+  end
+
+  def self.full_search(model, *args, &block)
+    model = model.capitalize
+
+    return eval "#{model}.full_text_search(#{args})"
   end
 end

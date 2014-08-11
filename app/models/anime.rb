@@ -9,6 +9,7 @@ class Anime < Entity
   include Mongoid::Document
   include Mongoid::Search
 
+  field :name, type: String
   field :director, type: Person
   field :studio, type: Studio
   field :network, type: Network
@@ -36,5 +37,5 @@ class Anime < Entity
   has_and_belongs_to_many :sequels, :class_name => 'Anime'
   has_and_belongs_to_many :prequels, :class_name => 'Anime'
 
-  search :name
+  search_in :name
 end
