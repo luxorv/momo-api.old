@@ -65,3 +65,6 @@ episode = Episode.create({
     anime: anime})
 
 episode.save
+
+genre = Genre.create(name: :genre1, description: :GenreDescr)
+genre.save
