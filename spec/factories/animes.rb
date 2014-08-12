@@ -4,6 +4,7 @@ FactoryGirl.define do
 
   factory :anime do
     name
+    description
     association :director, factory: :person
     association :studio, factory: :studio
     association :network, factory: :network

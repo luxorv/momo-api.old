@@ -1,7 +1,6 @@
-class Manga
+class Manga < Entity
   include Mongoid::Document
 
-  field :name, type: String
   field :writer, type: Person
   field :publisher, type: Entity
   field :english_publisher, type: Entity

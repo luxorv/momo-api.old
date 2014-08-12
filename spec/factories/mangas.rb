@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :manga do
     name
+    description
     association :writer, factory: :person
     association :publisher, factory: :entity, entity_type: :publisher
     association :english_publisher, factory: :entity, entity_type: :publisher

@@ -5,11 +5,10 @@
 # search_in :brand, :name, :tags => :name, :category => :name, :info => [:summary, :description]
 #
 
-class Anime
+class Anime < Entity
   include Mongoid::Document
   include Mongoid::Search
 
-  field :name, type: String
   field :director, type: Person
   field :studio, type: Studio
   field :network, type: Network
