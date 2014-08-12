@@ -9,6 +9,7 @@ class Anime
   include Mongoid::Document
   include Mongoid::Search
 
+  field :name, type: String
   field :director, type: Person
   field :studio, type: Studio
   field :network, type: Network
