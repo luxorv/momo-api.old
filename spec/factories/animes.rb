@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :anime do
+    name
     director ""
     studio ""
     network ""

@@ -29,7 +29,8 @@ RSpec.describe GenresController, :type => :controller do
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    attrs = attributes_for(:anime)
+
   }
 
   # This should return the minimal set of values that should be in the session
@@ -51,6 +52,14 @@ RSpec.describe GenresController, :type => :controller do
       get :show, {:id => genre.to_param}, valid_session
       expect(assigns(:genre)).to eq(genre)
     end
+
+    it "assign invalid attributes to @genre" do
+      genre = Genre.create! invalid_attributes
+      get :show, {:id => genre.to_param}, valid_session
+      expect(assigns(:genre)).to eq(genre)
+    end
+
+
   end
 
 end
