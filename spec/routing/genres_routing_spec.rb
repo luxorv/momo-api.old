@@ -7,16 +7,8 @@ RSpec.describe GenresController, :type => :routing do
       expect(:get => "/genres").to route_to("genres#index")
     end
 
-    it "routes to #new" do
-      expect(:get => "/genres/new").to route_to("genres#new")
-    end
-
     it "routes to #show" do
       expect(:get => "/genres/1").to route_to("genres#show", :id => "1")
-    end
-
-    it "routes to #edit" do
-      expect(:get => "/genres/1/edit").to route_to("genres#edit", :id => "1")
     end
 
     it "routes to #create" do
