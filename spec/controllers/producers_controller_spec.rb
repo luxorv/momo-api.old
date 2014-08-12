@@ -18,39 +18,37 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe AnimesController, :type => :controller do
+RSpec.describe ProducersController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # Anime. As you add validations to Anime, be sure to
+  # Producer. As you add validations to Producer, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    attrs = attributes_for :anime
+    attrs = attributes_for :producer
   }
 
   let(:invalid_attributes) {
-    attrs = attributes_for :genre
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # AnimesController. Be sure to keep this updated too.
+  # ProducersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET index" do
-    it "assigns all animes as @animes" do
-      animes = Anime.all
+    it "assigns all producers as @producers" do
+      producer = Producer.all.to_json
       get :index, {}, valid_session
-      expect(assigns(:animes).to_json).to eq(animes.to_json)
+      expect(assigns(:producers).to_json).to eq(producer)
     end
   end
 
   describe "GET show" do
-    it "assigns the requested anime as @anime" do
-      anime = Anime.create! valid_attributes
-      get :show, {:id => anime.to_param}, valid_session
-      expect(assigns(:anime)).to eq(anime)
+    it "assigns the requested producer as @producer" do
+      producer = Producer.create! valid_attributes
+      get :show, {:id => producer.to_param}, valid_session
+      expect(assigns(:producer)).to eq(producer)
     end
   end
-
 
 end

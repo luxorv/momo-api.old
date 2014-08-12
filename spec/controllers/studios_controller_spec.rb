@@ -18,39 +18,37 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe AnimesController, :type => :controller do
+RSpec.describe StudiosController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # Anime. As you add validations to Anime, be sure to
+  # Studio. As you add validations to Studio, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    attrs = attributes_for :anime
+    attrs = attributes_for :studio
   }
 
   let(:invalid_attributes) {
-    attrs = attributes_for :genre
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # AnimesController. Be sure to keep this updated too.
+  # StudiosController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET index" do
-    it "assigns all animes as @animes" do
-      animes = Anime.all
+    it "assigns all studios as @studios" do
+      studio = Studio.all.to_json
       get :index, {}, valid_session
-      expect(assigns(:animes).to_json).to eq(animes.to_json)
+      expect(assigns(:studios).to_json).to eq(studio)
     end
   end
 
   describe "GET show" do
-    it "assigns the requested anime as @anime" do
-      anime = Anime.create! valid_attributes
-      get :show, {:id => anime.to_param}, valid_session
-      expect(assigns(:anime)).to eq(anime)
+    it "assigns the requested studio as @studio" do
+      studio = Studio.create! valid_attributes
+      get :show, {:id => studio.to_param}, valid_session
+      expect(assigns(:studio)).to eq(studio)
     end
   end
-
 
 end

@@ -6,7 +6,6 @@ class Entity
   field :entity_type, type: String
   field :description, type: String
 
-
   scope :films, where(entity_type: :film)
 
   before_create :set_entity_type

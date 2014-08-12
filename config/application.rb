@@ -65,6 +65,11 @@ module Momo
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # Adding Fixture Generator specification for Factory_Girl
+    config.generators do |g|
+      g.fixture_replacement :factory_girl
+    end
+
     # Load new other modules
     # config.autoload_paths += ["#{config.root}/app/services"]
   end
