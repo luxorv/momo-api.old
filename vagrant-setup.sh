@@ -8,6 +8,7 @@ vagrant ssh -c "ln -s /vagrant/ ./ & mv vagrant project"
 vagrant ssh -c "echo 'source ~/project/vagrant/git-config.sh' >> ~/.bashrc"
 vagrant ssh -c "echo 'source ~/project/vagrant/setup.bashrc.sh' >> ~/.bashrc"
 vagrant ssh -c "echo 'alias cls=clear' >> ~/.bashrc"
+vagrant ssh -c "echo 'alias test=bundle exec rspec' >> ~/.bashrc"
 vagrant ssh -c "source ~/.bashrc"
 
 vagrant ssh -c "sudo apt-get update"
