@@ -2,5 +2,8 @@
 
 FactoryGirl.define do
   factory :network do
+    name
+    description
+    region "America"
   end
 end
