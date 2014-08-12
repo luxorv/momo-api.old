@@ -2,5 +2,8 @@
 
 FactoryGirl.define do
   factory :entity do
+    name
+    description
+    entity_type "Entity"
   end
 end
