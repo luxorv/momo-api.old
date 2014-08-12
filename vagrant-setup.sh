@@ -27,7 +27,7 @@ vagrant ssh -c "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
 
 #configure git
 vagrant ssh -c "git config --global color.ui true"
-vagrant ssh -c "git config --global user.name Rapito"
+vagrant ssh -c "git config --global user.name rapito"
 vagrant ssh -c "git config --global user.email robert.apb@hotmail.com"
 vagrant ssh -c "ssh-keygen -t rsa -C robert.apb@hotmail.com"
 echo "Copy your public key and paste in github!"
