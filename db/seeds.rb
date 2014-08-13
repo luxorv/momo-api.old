@@ -12,5 +12,7 @@ require 'factory_girl_rails'
   FactoryGirl.create :manga
   FactoryGirl.create :anime
   FactoryGirl.create :episode
+
+  FactoryGirl.create :otaku
 end
 

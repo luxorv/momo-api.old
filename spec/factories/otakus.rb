@@ -2,11 +2,21 @@
 
 FactoryGirl.define do
   sequence(:email) { |x| "email#{x}@momo.com" }
-  sequence(:ip_address) { |x| "192.168.1.#{x}" }
+  sequence(:current_sign_in_ip) { |x| "192.168.1.#{x}" }
+  sequence(:last_sign_in_ip) { |x| "192.168.0.#{x}" }
+  sequence(:password) { |x| "WeLoveMomo#{x}" }
 
   factory :otaku do
-    ## Database authenticatable
     email
+    password
+
+    sign_in_count 1
+    current_sign_in_at Time.now
+    last_sign_in_at Time.now
+
+    current_sign_in_ip
+    last_sign_in_ip
+
     # encrypted_password
 
     ## Recoverable
@@ -17,10 +27,5 @@ FactoryGirl.define do
     # remember_created_at
 
     ## Trackable
-    sign_in_count 1
-    current_sign_in_at Time.now
-    last_sign_in_at Time.now
-    current_sign_in_ip ip_address
-    last_sign_in_ip ip_address
   end
 end
