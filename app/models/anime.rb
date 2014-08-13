@@ -36,6 +36,7 @@ class Anime < Entity
   has_many :episodes
   has_and_belongs_to_many :sequels, :class_name => 'Anime'
   has_and_belongs_to_many :prequels, :class_name => 'Anime'
+  has_and_belongs_to_many :genres
 
-  search_in :name
+  search_in :name, :genres => :name
 end
