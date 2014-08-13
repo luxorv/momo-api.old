@@ -10,6 +10,7 @@ FactoryGirl.define do
     name
     email
     password
+    role :otaku
 
     sign_in_count 1
     current_sign_in_at Time.now

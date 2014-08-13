@@ -9,6 +9,7 @@ class Otaku
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   field :name
+  field :role
   validates_presence_of :name
   validates_uniqueness_of :name, :email, :case_sensitive => false
 
