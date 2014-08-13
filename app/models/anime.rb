@@ -18,17 +18,23 @@ class Anime < Entity
   field :episodes, type: Array
   field :manga, type: Manga
 
+  # Prequels and Sequels of Anime
+  field :sequels, type: Array
+  field :prequels, type: Array
+
   field :licenses, type: String
   field :films, type: Entity
 
-  belongs_to :director, :class_name => "Person"
+  belongs_to :director, :class_name => 'Person'
   belongs_to :studio
   belongs_to :network
-  belongs_to :english_network, :class_name => "Network"
+  belongs_to :english_network, :class_name => 'Network'
   belongs_to :manga
-  has_many :licenses, :class_name => "Producer"
-  has_many :films, :class_name => "Entity"
+  has_many :licenses, :class_name => 'Producer'
+  has_many :films, :class_name => 'Entity'
   has_many :episodes
+  has_and_belongs_to_many :sequels, :class_name => 'Anime'
+  has_and_belongs_to_many :prequels, :class_name => 'Anime'
 
   search :name
 end
