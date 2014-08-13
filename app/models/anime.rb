@@ -29,7 +29,6 @@ class Anime < Entity
   has_many :licenses, :class_name => "Producer"
   has_many :films, :class_name => "Entity"
   has_many :episodes
-  # has_many :episodes
 
   search :name
 end
