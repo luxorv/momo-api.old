@@ -1,5 +1,7 @@
 Momo::Application.routes.draw do
 
+  devise_for :otakus
+
   resources :animes, except: [:new, :edit]
 
   resources :studios, except: [:new, :edit]

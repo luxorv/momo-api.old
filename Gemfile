@@ -7,6 +7,7 @@ gem 'rails', '3.2.13'
 gem 'rails-api'
 
 # Auth gems
+gem 'bcrypt-ruby'
 gem 'devise'
 
 # For Databases and Stuff
