@@ -10,7 +10,7 @@ FactoryGirl.define do
     type "NAE"
     synopsis
     length Time.now
-    url [website]
+    urls %w(www.1.com www.2.com)
     release_date Date.today
     season 1
     popularity 1.35

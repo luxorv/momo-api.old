@@ -6,7 +6,7 @@ class Episode
   field :type, type: String
   field :synopsis, type: String
   field :length, type: Time
-  field :urls, type: String
+  field :urls, type: Array
   field :release_date, type: Date
   field :season, type: Integer
   field :popularity, type: Float

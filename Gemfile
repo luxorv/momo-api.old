@@ -1,23 +1,23 @@
 source 'https://rubygems.org'
 
+# Rails Framework gems
 gem 'rails', '3.2.13'
-
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-
 gem 'rails-api'
 
+# For Databases and Stuff
 gem 'mongoid'
-
 gem 'mongoid_search'
 gem 'sqlite3'
 
-gem 'pry-rails'
-# For Fixtures and testing
+gem 'factory_girl'
 
+
+# For Testing and debugging
+gem 'pry-rails'
 group :development, :test do
-  gem "factory_girl_rails", "~> 4.0"
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'rspec-rails', '~> 3.0.0'
 end
 
