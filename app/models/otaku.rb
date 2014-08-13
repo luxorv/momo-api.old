@@ -1,5 +1,8 @@
 class Otaku
   include Mongoid::Document
+
+  acts_as_token_authenticatable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -14,6 +17,7 @@ class Otaku
   validates_uniqueness_of :name, :email, :case_sensitive => false
 
   ## Database authenticatable
+  field :authentication_token, type: String
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
 

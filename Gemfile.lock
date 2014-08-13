@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/rapito/simple_token_authentication.git
+  revision: 6bf99e8e10d1792044451dc3a847d4bb3107189b
+  specs:
+    simple_token_authentication (1.2.1)
+      actionmailer (>= 3.2.6, < 5)
+      activerecord (>= 3.2.6, < 5)
+      devise (~> 3.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,7 +46,7 @@ GEM
       bcrypt (>= 3.1.3)
     builder (3.0.4)
     coderay (1.1.0)
-    devise (3.3.0)
+    devise (3.2.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -162,4 +171,5 @@ DEPENDENCIES
   rails (= 3.2.13)
   rails-api
   rspec-rails (~> 3.0.0)
+  simple_token_authentication!
   sqlite3

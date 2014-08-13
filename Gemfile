@@ -6,9 +6,7 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'rails-api'
 
-# Auth gems
-gem 'bcrypt-ruby'
-gem 'devise'
+
 
 # For Databases and Stuff
 gem 'mongoid'
@@ -16,6 +14,11 @@ gem 'mongoid_search'
 gem 'sqlite3'
 
 gem 'factory_girl'
+# Auth gems
+gem 'bcrypt-ruby'
+gem 'devise'
+# gem 'simple_token_authentication', :path => '../simple_token_authentication/'
+gem 'simple_token_authentication', :git => 'https://github.com/rapito/simple_token_authentication.git'
 
 # For Testing and debugging
 gem 'pry-rails'
