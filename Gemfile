@@ -6,13 +6,15 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'rails-api'
 
+# Auth gems
+gem 'devise'
+
 # For Databases and Stuff
 gem 'mongoid'
 gem 'mongoid_search'
 gem 'sqlite3'
 
 gem 'factory_girl'
-
 
 # For Testing and debugging
 gem 'pry-rails'
