@@ -16,3 +16,5 @@ require 'factory_girl_rails'
   FactoryGirl.create :otaku
 end
 
+FactoryGirl.create :otaku, :email => "test@mongo.com", :password => "password"
+
