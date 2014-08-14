@@ -47,12 +47,17 @@ class BentosController < Devise::SessionsController
   def failure
     render :status => 401,
            :json => {:success => false,
-                     :info => "Login Failed",
+                     :info => "Login Failed. Please check email and password.",
                      :data => {}}
   end
 
   def get_json data
-    json = JSON.parse(data)
+    begin
+      json = JSON.parse(data)
+    rescue
+      fake_date = "{\"otaku\":{\"email\":\"email@email.com\",\"password\":\"pass\"}}"
+      json = JSON.parse(fake_date)
+    end
     json
   end
 
