@@ -14,7 +14,7 @@ class Otaku
   field :name
   field :role
   validates_presence_of :name
-  validates_uniqueness_of :name, :email, :case_sensitive => false
+  validates_uniqueness_of :email, :case_sensitive => false
 
   ## Database authenticatable
   field :authentication_token, type: String

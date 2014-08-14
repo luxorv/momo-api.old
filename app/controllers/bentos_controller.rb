@@ -18,6 +18,7 @@ class BentosController < Devise::SessionsController
   def create
     json = get_json request.body.read
     otaku = auth_with_json json
+    # puts otaku
 
     if otaku
       render :status => 200,
@@ -75,6 +76,7 @@ class BentosController < Devise::SessionsController
 
   def authenticate(email, password)
     otaku = Otaku.find_for_authentication(:email => email)
+    # puts otaku
 
     return false if not otaku
 
