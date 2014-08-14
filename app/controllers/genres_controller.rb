@@ -1,4 +1,7 @@
 class GenresController < ApplicationController
+
+  acts_as_token_authentication_handler_for Otaku #, :except => [:index,:show]
+
   # GET /genres
   # GET /genres.json
   def index

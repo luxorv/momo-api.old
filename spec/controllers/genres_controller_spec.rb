@@ -24,13 +24,24 @@ RSpec.describe GenresController, :type => :controller do
   # Genre. As you add validations to Genre, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-
     attrs = attributes_for(:genre)
+    attrs
+  }
+
+  let(:auth_params) {
+    auth_params = {}
+
+    otaku = Otaku.last
+    otaku.authentication_token ||= Devise.friendly_token
+    auth_params[:otaku_email] = otaku.email
+    auth_params[:otaku_token] = otaku.authentication_token
+
+    auth_params
   }
 
   let(:invalid_attributes) {
     attrs = attributes_for(:anime)
-
+    attrs
   }
 
   # This should return the minimal set of values that should be in the session
@@ -41,7 +52,9 @@ RSpec.describe GenresController, :type => :controller do
   describe "GET index" do
     it "assigns all genres as @genres" do
       genres = Genre.all.to_json
-      get :index, {}, valid_session
+      puts auth_params
+
+      get :index, auth_params, valid_session
       expect(assigns(:genres).to_json).to eq(genres)
     end
   end
@@ -49,13 +62,11 @@ RSpec.describe GenresController, :type => :controller do
   describe "GET show" do
     it "assigns the requested genre as @genre" do
       genre = Genre.create! valid_attributes
-      get :show, {:id => genre.to_param}, valid_session
-      expect(assigns(:genre)).to eq(genre)
-    end
 
-    it "assign invalid attributes to @genre" do
-      genre = Genre.create! invalid_attributes
-      get :show, {:id => genre.to_param}, valid_session
+      auth_params[:id] = genre.to_param
+      puts auth_params
+
+      get :show, auth_params, valid_session
       expect(assigns(:genre)).to eq(genre)
     end
 
