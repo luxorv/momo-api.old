@@ -9,6 +9,7 @@ FactoryGirl.define do
     association :studio, factory: :studio
     association :network, factory: :network
     association :english_network, factory: :network
+    association :genres, factory: :genres
     # prequels [{name: :prequel1, id: '123456'}]
     # sequels [{name: :sequel1, id: '1234567'},{name: :sequel2, id: '1234568'}]
     prequels []
@@ -20,6 +21,10 @@ FactoryGirl.define do
     end_run_date Date.today
     association :manga, factory: :manga
 
+<<<<<<< HEAD
+=======
+    # after(:create) { |anime| anime.genres = create_list(:genres, 5)}
+>>>>>>> Documented finder methods
     after(:create) { |anime| anime.episodes = create_list(:episode, 5)}
     after(:create) { |anime| anime.films = create_list(:entity, 5, entity_type: :Film)}
     after(:create) { |anime| anime.licenses = create_list(:producer, 5)}
