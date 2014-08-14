@@ -24,8 +24,8 @@ class Finder
   # recieves the method name and its arguments for searching, its
   # accepted patterns are:
   #
-  # - find_<model_name>_by_<attribute_model> <argument>
-  # - search_<model_name> <argument>
+  # - Finder.find_<model_name>_by_<attribute_model> <argument>
+  # - Finder.search_<model_name> <argument>
   #
   # The last one will search <model_name> for a model with a keyword
   # <argument> in it.
@@ -34,6 +34,9 @@ class Finder
 
   def self.method_missing(meth, *args, &block)
 
+    # Compares method name with regexp and separates
+    # the matched strings for method arguments.
+    #
     if meth.to_s =~ /^find_(.+)_by_(.+)$/
       self.find_by_method($1, $2, *args, &block)
     elsif meth.to_s =~ /^search_(.+)$/
@@ -57,13 +60,13 @@ class Finder
 
     model = model.capitalize
 
-    attrs = attrs.split('_and_')
+    attrs = attrs.split('_and_') # here we separate attributes on methodname
 
-    attrs_with_args = [attrs, args].transpose
+    attrs_with_args = [attrs, args].transpose # unite attributes and arguments
 
-    conditions = Hash[attrs_with_args]
+    conditions = Hash[attrs_with_args] # make a hash with { attr => arg }
 
-    return eval "#{model.capitalize}.where(#{conditions})"
+    return eval "#{model.capitalize}.where(#{conditions})" # query on the model
   end
 
   # =================================================================
