@@ -1,6 +1,19 @@
 Momo::Application.routes.draw do
 
-  devise_for :otakus
+  devise_scope :otaku do
+    post   '/otakus/bento', to: 'bentos#create', :as => 'login'
+    delete '/otakus/bento', to: 'bentos#destroy', :as => 'logout'
+
+    post   '/otakus/password' => 'devise/sessions#create'
+    put    '/otakus/password' => 'devise/sessions#update'
+
+    post   '/otakus' => 'devise/registrations#create'
+    put    '/otakus' => 'devise/registrations#update'
+    delete '/otakus' => 'devise/registrations#destroy'
+  end
+  devise_for :otaku
+
+  # resources :bentos, only: [:create, :destroy]
 
   resources :otakus, only: [:index, :show]
 

@@ -2,7 +2,6 @@ class OtakusController < ApplicationController
 
   acts_as_token_authentication_handler_for Otaku, :except => [:index,:show]
 
-  before_filter
   # GET /otakus
   # GET /otakus.json
   def index
