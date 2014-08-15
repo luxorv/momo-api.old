@@ -48,7 +48,7 @@ RSpec.describe AnimesController, :type => :controller do
     it "assigns the requested anime as @anime" do
       anime = Anime.create! valid_attributes
       get :show, {:id => anime.to_param}, valid_session
-      expect(assigns(:anime)).to eq(anime)
+      expect(assigns(:anime).first).to eq(anime)
     end
   end
 
