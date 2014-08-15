@@ -61,6 +61,7 @@ class Finder
     model = model.capitalize
 
     attrs = attrs.split('_and_') # here we separate attributes on methodname
+    args = args[0] if args[0].kind_of?(Array)
 
     attrs_with_args = [attrs, args].transpose # unite attributes and arguments
 
@@ -80,6 +81,7 @@ class Finder
 
   def self.full_search(model, *args, &block)
     model = model.capitalize
+    args = args[0] if args[0].kind_of?(Array)
 
     return eval "#{model}.full_text_search(#{args})"
   end
