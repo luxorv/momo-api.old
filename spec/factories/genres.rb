@@ -7,5 +7,6 @@ FactoryGirl.define do
   factory :genre do
     name
     description
+    after(:create) { |genre| genre.animes = create_list(:anime, 5)}
   end
 end
