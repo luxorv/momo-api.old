@@ -38,5 +38,5 @@ class Anime < Entity
   has_and_belongs_to_many :prequels, :class_name => 'Anime'
   has_and_belongs_to_many :genres
 
-  search_in :name, :genres => :name
+  search_in :name
 end
