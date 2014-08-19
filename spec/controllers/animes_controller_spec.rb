@@ -52,5 +52,35 @@ RSpec.describe AnimesController, :type => :controller do
     end
   end
 
+  describe "POST create" do
+    it "should creates a new anime with Pusher" do
+
+      params = {:anime => valid_attributes}
+      get :create, params, valid_session
+
+      anime = assigns(:anime)
+
+      # binding.pry
+
+      expect(anime).to be_an(Anime)
+      expect(anime.name).to be_a(String)
+      expect(anime.description).to be_a(String)
+
+      expect(anime.errors.size).to  eq(0)
+    end
+
+    it "should fail creating a new anime with Pusher" do
+
+      params = {:not_anime => valid_attributes}
+      get :create, params, valid_session
+
+      anime = assigns(:anime)
+      # binding.pry
+
+      expect(anime.errors.size).to  eq(2)
+      puts anime.errors
+    end
+  end
+
 
 end

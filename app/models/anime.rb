@@ -9,6 +9,11 @@ class Anime < Entity
   include Mongoid::Document
   include Mongoid::Search
 
+  # validations
+  validates :name, allow_nil: false, allow_blank: false, presence: true
+  validates :description, allow_nil: false, allow_blank: false, presence: true
+
+
   field :name, type: String
   field :director, type: Person
   field :studio, type: Studio

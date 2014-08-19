@@ -32,9 +32,9 @@ class AnimesController < ApplicationController
   # POST /animes
   # POST /animes.json
   def create
-    @anime = Anime.new(params[:anime])
+    @anime = Pusher.create_anime(params[:anime])
 
-    if @anime.save
+    if @anime
       render json: @anime, status: :created, location: @anime
     else
       render json: @anime.errors, status: :unprocessable_entity

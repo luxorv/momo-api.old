@@ -12,6 +12,10 @@
 
 class Pusher
 
-
-
+  def self.create_anime attrs
+    # binding.pry
+    anime = Anime.new(attrs)
+    anime.save
+    anime
+  end
 end
