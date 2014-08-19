@@ -53,7 +53,7 @@ RSpec.describe AnimesController, :type => :controller do
   end
 
   describe "POST create" do
-    it "should creates a new anime with Pusher" do
+    it "should create a new anime with Pusher" do
 
       params = {:anime => valid_attributes}
       get :create, params, valid_session
@@ -79,6 +79,43 @@ RSpec.describe AnimesController, :type => :controller do
 
       expect(anime.errors.size).to  eq(2)
       puts anime.errors
+    end
+  end
+
+  describe "PUT update" do
+    it "should update an anime with Pusher" do
+
+      id = Anime.first.id;
+      attrs = valid_attributes
+      attrs[:name] = "Name #{Time.now.to_s}"
+      params = {:id => id, :anime => attrs}
+      binding.pry
+      get :update, params, valid_session
+
+      anime = assigns(:anime)
+
+      # binding.pry
+
+      expect(anime).to be_an(Anime)
+      expect(anime.name).to eq(valid_attributes[:name])
+
+      expect(anime.errors.size).to  eq(0)
+    end
+
+    it "should fail updating an anime with Pusher" do
+
+      id = Anime.first.id;
+      attrs = valid_attributes
+      attrs[:name] = nil
+
+      params = {:id => id, :anime => attrs}
+      get :update, params, valid_session
+
+
+      anime = assigns(:anime)
+
+      # binding.pry
+      expect(anime.errors.size).not_to  eq(0)
     end
   end
 

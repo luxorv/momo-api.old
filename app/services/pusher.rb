@@ -13,9 +13,19 @@
 class Pusher
 
   def self.create_anime attrs
-    # binding.pry
     anime = Anime.new(attrs)
     anime.save
     anime
+  end
+
+  def self.update_anime params
+    anime = Finder.find_anime_by_id(params[:id]).first
+    anime.update_attributes params[:anime]
+    anime
+  end
+
+  def self.destroy_anime params
+    @anime = Anime.find_anime_by_id(params[:id]).first
+    @anime.destroy
   end
 end

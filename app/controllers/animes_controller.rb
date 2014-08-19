@@ -44,9 +44,10 @@ class AnimesController < ApplicationController
   # PATCH/PUT /animes/1
   # PATCH/PUT /animes/1.json
   def update
-    @anime = Anime.find(params[:id])
+    # @anime = Finder.find_anime_by_id params[:id]
+    @anime = Pusher.update_anime(params)
 
-    if @anime.update_attributes(params[:anime])
+    if @anime
       head :no_content
     else
       render json: @anime.errors, status: :unprocessable_entity
@@ -56,8 +57,7 @@ class AnimesController < ApplicationController
   # DELETE /animes/1
   # DELETE /animes/1.json
   def destroy
-    @anime = Anime.find(params[:id])
-    @anime.destroy
+    @anime = Pusher.destroy_anime(params)
 
     head :no_content
   end
