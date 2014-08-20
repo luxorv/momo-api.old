@@ -56,7 +56,7 @@ RSpec.describe AnimesController, :type => :controller do
     it "should create a new anime with Pusher" do
 
       params = {:anime => valid_attributes}
-      get :create, params, valid_session
+      post :create, params, valid_session
 
       anime = assigns(:anime)
 
@@ -72,7 +72,7 @@ RSpec.describe AnimesController, :type => :controller do
     it "should fail creating a new anime with Pusher" do
 
       params = {:not_anime => valid_attributes}
-      get :create, params, valid_session
+      post :create, params, valid_session
 
       anime = assigns(:anime)
       # binding.pry
@@ -89,8 +89,8 @@ RSpec.describe AnimesController, :type => :controller do
       attrs = valid_attributes
       attrs[:name] = "Name #{Time.now.to_s}"
       params = {:id => id, :anime => attrs}
-      binding.pry
-      get :update, params, valid_session
+      # binding.pry
+      put :update, params, valid_session
 
       anime = assigns(:anime)
 
@@ -109,7 +109,7 @@ RSpec.describe AnimesController, :type => :controller do
       attrs[:name] = nil
 
       params = {:id => id, :anime => attrs}
-      get :update, params, valid_session
+      put :update, params, valid_session
 
 
       anime = assigns(:anime)
@@ -117,6 +117,18 @@ RSpec.describe AnimesController, :type => :controller do
       # binding.pry
       expect(anime.errors.size).not_to  eq(0)
     end
+  end
+
+  describe "DELETE destroy" do
+    it "should delete an anime with Pusher" do
+
+      anime = Anime.first
+
+      delete :destroy, {:id => anime.id}, valid_session
+
+      expect(anime).not_to eq(Anime.first)
+    end
+
   end
 
 

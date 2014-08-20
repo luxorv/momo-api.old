@@ -25,7 +25,7 @@ class Pusher
   end
 
   def self.destroy_anime params
-    @anime = Anime.find_anime_by_id(params[:id]).first
+    @anime = Finder.find_anime_by_id(params[:id]).first
     @anime.destroy
   end
 end

@@ -44,7 +44,6 @@ class AnimesController < ApplicationController
   # PATCH/PUT /animes/1
   # PATCH/PUT /animes/1.json
   def update
-    # @anime = Finder.find_anime_by_id params[:id]
     @anime = Pusher.update_anime(params)
 
     if @anime
