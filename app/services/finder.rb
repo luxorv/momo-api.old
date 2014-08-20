@@ -64,7 +64,6 @@ class Finder
     args = args[0] if args[0].kind_of?(Array)
 
     attrs_with_args = [attrs, args].transpose # unite attributes and arguments
-
     conditions = Hash[attrs_with_args] # make a hash with { attr => arg }
 
     return eval "#{model.capitalize}.where(#{conditions})" # query on the model

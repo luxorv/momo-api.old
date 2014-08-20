@@ -18,9 +18,9 @@ class StudiosController < ApplicationController
   # POST /studios
   # POST /studios.json
   def create
-    @studio = Studio.new(params[:studio])
+    @studio = Pusher.create_studio(params[:studio])
 
-    if @studio.save
+    if @studio
       render json: @studio, status: :created, location: @studio
     else
       render json: @studio.errors, status: :unprocessable_entity
@@ -30,9 +30,9 @@ class StudiosController < ApplicationController
   # PATCH/PUT /studios/1
   # PATCH/PUT /studios/1.json
   def update
-    @studio = Studio.find(params[:id])
+    @studio = Pusher.update_studio(params)
 
-    if @studio.update_attributes(params[:studio])
+    if @studio
       head :no_content
     else
       render json: @studio.errors, status: :unprocessable_entity
@@ -42,8 +42,7 @@ class StudiosController < ApplicationController
   # DELETE /studios/1
   # DELETE /studios/1.json
   def destroy
-    @studio = Studio.find(params[:id])
-    @studio.destroy
+    @studio = Pusher.destroy_studio(params)
 
     head :no_content
   end
