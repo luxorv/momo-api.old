@@ -30,6 +30,11 @@ class Pusher
   # =================================================================
 
   def self.method_missing(meth, *args, &block)
+    # If we received empty args then return nil
+    if args.size == 1 and args[0].nil?
+      return {errors: ['Invalid or empty params!']}
+    end
+
     # Compares method name with regexp and separates
     # the matched strings for method arguments.
     #
@@ -50,8 +55,8 @@ class Pusher
   # =================================================================
   def self.action_model(action, model, *args, &block)
     args = args[0] if args[0].kind_of?(Hash)
-    args = Hash(args)
     # binding.pry
+    args = Hash(args)
     return eval "self.#{action}_model(\"#{model}\",#{args})" # call action_{model}
   end
 
@@ -64,9 +69,9 @@ class Pusher
   #
   # =================================================================
   def self.create_model(model, args, &block)
-    eval "#{model} = #{model.capitalize()}.new(#{args})"
-    eval "#{model}.save"
-    return eval "#{model}"
+    model = eval "return #{model.capitalize()}.new(#{args})"
+    model.save
+    return model
   end
 
   def self.update_model(model, args, &block)
