@@ -1,15 +1,24 @@
 class Error
 
-  @errors= []
-  def new *args
+  attr_accessor :errors
+  attr_accessor :model_name
+  @model_name = 'Model'
+  @errors = []
 
-    if args.instance_of? Array
-      @errors = args
-    else
-      @errors.push args
-    end
+  def ==(comp)
+    false
+  end
 
+  def initialize(model_name,*args)
 
+    # binding.pry
+    @model_name = model_name
+    @errors = args
+
+  end
+
+  def model_name
+    @model_name
   end
 
 end

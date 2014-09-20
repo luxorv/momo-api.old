@@ -30,15 +30,16 @@ class Pusher
   # =================================================================
 
   def self.method_missing(meth, *args, &block)
-    # If we received empty args then return nil
-    if args.size == 1 and args[0].nil?
-      return {errors: ['Invalid or empty params!']}
-    end
 
     # Compares method name with regexp and separates
     # the matched strings for method arguments.
     #
     if meth.to_s =~ /^(.+)_(.+)$/
+      # If we received empty args then return nil
+      if args.size == 1 and args[0].nil?
+        return Error.new "#{$2.capitalize()}","Invalid params!"
+      end
+
       self.action_model($1, $2, *args, &block)
     else
       super
