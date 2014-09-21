@@ -10,7 +10,6 @@ class Entity
 
   # validations
   validates :name, allow_nil: false, allow_blank: false, presence: true
-  validates :description, allow_nil: false, allow_blank: false, presence: true
 
   before_create :set_entity_type
 

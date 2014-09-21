@@ -28,6 +28,7 @@ RSpec.describe PeopleController, :type => :controller do
   }
 
   let(:invalid_attributes) {
+    attrs = attributes_for :genre
   }
 
   let(:valid_session) { {} }
@@ -44,8 +45,85 @@ RSpec.describe PeopleController, :type => :controller do
     it "assigns the requested person as @person" do
       person = Person.create! valid_attributes
       get :show, {:id => person.to_param}, valid_session
-      expect(assigns(:person)).to eq(person)
+      expect(assigns(:person).first).to eq(person)
     end
+  end
+
+  describe "POST create" do
+    it "should create a new person with Pusher" do
+
+      params = {:person => valid_attributes}
+      post :create, params, valid_session
+
+      person = assigns(:person)
+
+      # binding.pry
+
+      expect(person).to be_an(Person)
+      expect(person.name).to be_a(String)
+
+      expect(person.errors.size).to  eq(0)
+    end
+
+    it "should fail creating a new person with Pusher" do
+
+      params = {:not_person => valid_attributes}
+      post :create, params, valid_session
+
+      person = assigns(:person)
+
+      expect(person.errors.size).to_not  eq(0)
+      puts person.errors
+    end
+  end
+
+  describe "PUT update" do
+    it "should update an person with Pusher" do
+
+      id = Person.first.id;
+      attrs = valid_attributes
+      attrs[:name] = "Name #{Time.now.to_s}"
+      params = {:id => id, :person => attrs}
+      # binding.pry
+      put :update, params, valid_session
+
+      person = assigns(:person)
+
+      # binding.pry
+
+      expect(person).to be_an(Person)
+      expect(person.name).to eq(valid_attributes[:name])
+
+      expect(person.errors.size).to  eq(0)
+    end
+
+    it "should fail updating an person with Pusher" do
+
+      id = Person.first.id;
+      attrs = valid_attributes
+      attrs[:name] = nil
+
+      params = {:id => id, :person => attrs}
+      put :update, params, valid_session
+
+
+      person = assigns(:person)
+
+      # binding.pry
+      expect(person.errors.size).not_to  eq(0)
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "should delete an person with Pusher" do
+
+      person = Person.first
+
+      delete :destroy, {:id => person.id}, valid_session
+
+      expect(person).not_to eq(Person.first)
+    end
+
   end
 
 end
