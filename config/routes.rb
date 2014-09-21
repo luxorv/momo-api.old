@@ -17,7 +17,7 @@ Momo::Application.routes.draw do
 
   # resources :bentos, only: [:create, :destroy]
 
-  resources :otakus, only: [:index, :show]
+  resources :otakus #, only: [:index, :show]
 
   # resources :animes, except: [:new, :edit]
   resources :animes, except: [:new, :edit] do |anime|

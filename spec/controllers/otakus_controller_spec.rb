@@ -20,6 +20,17 @@ require 'rails_helper'
 
 RSpec.describe OtakusController, :type => :controller do
 
+  let(:auth_params) {
+    auth_params = {}
+
+    otaku = Otaku.last
+    otaku.authentication_token ||= Devise.friendly_token
+    auth_params[:otaku_email] = otaku.email
+    auth_params[:otaku_token] = otaku.authentication_token
+
+    auth_params
+  }
+
   # This should return the minimal set of attributes required to create a valid
   # Otaku. As you add validations to Otaku, be sure to
   # adjust the attributes here as well.
@@ -31,6 +42,7 @@ RSpec.describe OtakusController, :type => :controller do
   }
 
   let(:invalid_attributes) {
+    attrs = attributes_for :person
   }
 
   # This should return the minimal set of values that should be in the session
@@ -50,8 +62,95 @@ RSpec.describe OtakusController, :type => :controller do
     it "assigns the requested otaku as @otaku" do
       otaku = Otaku.create! valid_attributes
       get :show, {:id => otaku.to_param}, valid_session
-      expect(assigns(:otaku)).to eq(otaku)
+      expect(assigns(:otaku).first).to eq(otaku)
     end
+  end
+
+  describe "POST create" do
+    it "should create a new otaku with Pusher" do
+
+      params = {:otaku => valid_attributes}
+      params = params.merge auth_params
+
+      post :create, params, valid_session
+
+      otaku = assigns(:otaku)
+
+      # binding.pry
+
+      expect(otaku).to be_an(Otaku)
+      expect(otaku.name).to be_a(String)
+
+      expect(otaku.errors.size).to  eq(0)
+    end
+
+    it "should fail creating a new otaku with Pusher" do
+
+      params = {:not_otaku => valid_attributes}
+      params = params.merge auth_params
+
+      post :create, params, valid_session
+
+      otaku = assigns(:otaku)
+
+      expect(otaku.errors.size).to_not  eq(0)
+      puts otaku.errors
+    end
+  end
+
+  describe "PUT update" do
+    it "should update an otaku with Pusher" do
+
+      id = Otaku.first.id;
+      attrs = valid_attributes
+      attrs[:name] = "Name #{Time.now.to_s}"
+      params = {:id => id, :otaku => attrs}
+      params = params.merge auth_params
+
+      # binding.pry
+      put :update, params, valid_session
+
+      otaku = assigns(:otaku)
+
+      # binding.pry
+
+      expect(otaku).to be_an(Otaku)
+      expect(otaku.name).to eq(valid_attributes[:name])
+
+      expect(otaku.errors.size).to  eq(0)
+    end
+
+    it "should fail updating an otaku with Pusher" do
+
+      id = Otaku.first.id;
+      attrs = valid_attributes
+      attrs[:name] = nil
+
+      params = {:id => id, :otaku => attrs}
+      params = params.merge auth_params
+
+      put :update, params, valid_session
+
+
+      otaku = assigns(:otaku)
+
+      # binding.pry
+      expect(otaku.errors.size).not_to  eq(0)
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "should delete an otaku with Pusher" do
+
+      otaku = Otaku.first
+      params = {:id => otaku.id}
+      params = params.merge auth_params
+
+      delete :destroy, params, valid_session
+
+      expect(otaku).not_to eq(Otaku.first)
+    end
+
   end
 
 
