@@ -23,7 +23,6 @@ class GenresController < ApplicationController
   # POST /genres.json
   def create
     @genre = Pusher.create_genre(params[:genre])
-
     if @genre.valid?
       render json: @genre, status: :created, location: @genre
     else

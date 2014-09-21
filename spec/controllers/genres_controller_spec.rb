@@ -20,14 +20,6 @@ require 'rails_helper'
 
 RSpec.describe GenresController, :type => :controller do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Genre. As you add validations to Genre, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    attrs = attributes_for(:genre)
-    attrs
-  }
-
   let(:auth_params) {
     auth_params = {}
 
@@ -39,8 +31,17 @@ RSpec.describe GenresController, :type => :controller do
     auth_params
   }
 
+  # This should return the minimal set of attributes required to create a valid
+  # Genre. As you add validations to Genre, be sure to
+  # adjust the attributes here as well.
+  let(:valid_attributes) {
+
+    attrs = attributes_for(:genre)
+
+  }
+
   let(:invalid_attributes) {
-    attrs = attributes_for(:anime)
+    attrs = attributes_for(:genre)
     attrs
   }
 
@@ -67,10 +68,96 @@ RSpec.describe GenresController, :type => :controller do
       puts auth_params
 
       get :show, auth_params, valid_session
-      expect(assigns(:genre)).to eq(genre)
+      expect(assigns(:genre).first).to eq(genre)
+    end
+  end
+
+  describe "POST create" do
+    it "should create a new genre with Pusher" do
+
+      params = {:genre => valid_attributes}
+      params = params.merge auth_params
+
+      post :create, params, valid_session
+
+      genre = assigns(:genre)
+      # binding.pry
+
+
+      expect(genre).to be_an(Genre)
+      expect(genre.name).to be_a(String)
+      expect(genre.description).to be_a(String)
+
+      expect(genre.errors.size).to eq(0)
     end
 
+    it "should fail creating a new genre with Pusher" do
+
+      params = {:not_genre => valid_attributes}
+      params = params.merge auth_params
+
+      post :create, params, valid_session
+
+      genre = assigns(:genre)
+
+      expect(genre.errors.size).to_not eq(0)
+      puts genre.errors
+    end
+  end
+
+  describe "PUT update" do
+    it "should update an genre with Pusher" do
+
+      id = Genre.first.id;
+      attrs = valid_attributes
+      attrs[:name] = "Name #{Time.now.to_s}"
+      params = {:id => id, :genre => attrs}
+      params = params.merge auth_params
+
+      # binding.pry
+      put :update, params, valid_session
+
+      genre = assigns(:genre)
+
+      # binding.pry
+
+      expect(genre).to be_an(Genre)
+      expect(genre.name).to eq(valid_attributes[:name])
+
+      expect(genre.errors.size).to eq(0)
+    end
+
+    it "should fail updating an genre with Pusher" do
+
+      id = Genre.first.id;
+      attrs = valid_attributes
+      attrs[:name] = nil
+
+      params = {:id => id, :genre => attrs}
+      params = params.merge auth_params
+
+      put :update, params, valid_session
+
+      genre = assigns(:genre)
+
+      # binding.pry
+      expect(genre.errors.size).not_to eq(0)
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "should delete an genre with Pusher" do
+
+      genre = Genre.first
+      params = {:id => genre.id}
+      params = params.merge auth_params
+
+      delete :destroy, params, valid_session
+
+      expect(genre).not_to eq(Genre.first)
+    end
 
   end
+
 
 end
