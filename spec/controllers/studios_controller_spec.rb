@@ -28,6 +28,7 @@ RSpec.describe StudiosController, :type => :controller do
   }
 
   let(:invalid_attributes) {
+    attrs = attributes_for :genre
   }
 
   # This should return the minimal set of values that should be in the session
@@ -47,8 +48,86 @@ RSpec.describe StudiosController, :type => :controller do
     it "assigns the requested studio as @studio" do
       studio = Studio.create! valid_attributes
       get :show, {:id => studio.to_param}, valid_session
-      expect(assigns(:studio)).to eq(studio)
+      expect(assigns(:studio).first).to eq(studio)
     end
+  end
+
+  describe "POST create" do
+    it "should create a new studio with Pusher" do
+
+      params = {:studio => valid_attributes}
+      post :create, params, valid_session
+
+      studio = assigns(:studio)
+
+      # binding.pry
+
+      expect(studio).to be_an(Studio)
+      expect(studio.name).to be_a(String)
+      expect(studio.description).to be_a(String)
+
+      expect(studio.errors.size).to  eq(0)
+    end
+
+    it "should fail creating a new studio with Pusher" do
+
+      params = {:not_studio => valid_attributes}
+      post :create, params, valid_session
+
+      studio = assigns(:studio)
+
+      expect(studio.errors.size).to_not  eq(0)
+      puts studio.errors
+    end
+  end
+
+  describe "PUT update" do
+    it "should update an studio with Pusher" do
+
+      id = Studio.first.id;
+      attrs = valid_attributes
+      attrs[:name] = "Name #{Time.now.to_s}"
+      params = {:id => id, :studio => attrs}
+      # binding.pry
+      put :update, params, valid_session
+
+      studio = assigns(:studio)
+
+      # binding.pry
+
+      expect(studio).to be_an(Studio)
+      expect(studio.name).to eq(valid_attributes[:name])
+
+      expect(studio.errors.size).to  eq(0)
+    end
+
+    it "should fail updating an studio with Pusher" do
+
+      id = Studio.first.id;
+      attrs = valid_attributes
+      attrs[:name] = nil
+
+      params = {:id => id, :studio => attrs}
+      put :update, params, valid_session
+
+
+      studio = assigns(:studio)
+
+      # binding.pry
+      expect(studio.errors.size).not_to  eq(0)
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "should delete an studio with Pusher" do
+
+      studio = Studio.first
+
+      delete :destroy, {:id => studio.id}, valid_session
+
+      expect(studio).not_to eq(Studio.first)
+    end
+
   end
 
 end
