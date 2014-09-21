@@ -77,14 +77,15 @@ class Pusher
   end
 
   def self.update_model(model, args, &block)
-    eval "#{model} = Finder.find_#{model}_by_id(#{args[:id]}).first"
-    eval "#{model}.update_attributes #{args}[:#{model}]"
-    return eval "#{model}"
+    model_name = model
+    model = eval "Finder.find_#{model}_by_id('#{args['id']}').first"
+    model.update_attributes args["#{model_name}"]
+    return model
   end
 
   def self.destroy_model(model, args, &block)
-    eval "#{model} = Finder.find_#{model}_by_id(#{args[:id]}).first"
-    return eval "#{model}.destroy"
+    model = eval "return Finder.find_#{model}_by_id('#{args['id']}').first"
+    return model.destroy
   end
   #
   # def self.create_anime attrs
