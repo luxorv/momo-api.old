@@ -37,7 +37,8 @@ class Pusher
     if meth.to_s =~ /^(.+)_(.+)$/
       # If we received empty args then return nil
       if args.size == 1 and args[0].nil?
-        return Error.new "#{$2.capitalize()}","Invalid params!"
+        error = Error.new "#{$2.capitalize()}","Invalid params!"
+        return error.model_instance
       end
 
       self.action_model($1, $2, *args, &block)

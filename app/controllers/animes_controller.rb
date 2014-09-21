@@ -34,7 +34,7 @@ class AnimesController < ApplicationController
   def create
     @anime = Pusher.create_anime(params[:anime])
 
-    if @anime
+    if @anime.valid?
       render json: @anime, status: :created, location: @anime
     else
       render json: @anime.errors, status: :unprocessable_entity
@@ -46,7 +46,7 @@ class AnimesController < ApplicationController
   def update
     @anime = Pusher.update_anime(params)
 
-    if @anime
+    if @anime.valid?
       head :no_content
     else
       render json: @anime.errors, status: :unprocessable_entity

@@ -75,9 +75,8 @@ RSpec.describe AnimesController, :type => :controller do
       post :create, params, valid_session
 
       anime = assigns(:anime)
-      binding.pry
 
-      expect(anime.errors.size).to  not_eq(0)
+      expect(anime.errors.size).to_not  eq(0)
       puts anime.errors
     end
   end
