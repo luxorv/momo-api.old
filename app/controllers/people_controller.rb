@@ -18,9 +18,9 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(params[:person])
+    @person = Pusher.create_person(params[:person])
 
-    if @person.save
+    if @person.valid?
       render json: @person, status: :created, location: @person
     else
       render json: @person.errors, status: :unprocessable_entity
@@ -30,9 +30,9 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1
   # PATCH/PUT /people/1.json
   def update
-    @person = Person.find(params[:id])
+    @person = Pusher.update_person(params)
 
-    if @person.update_attributes(params[:person])
+    if @person.valid?
       head :no_content
     else
       render json: @person.errors, status: :unprocessable_entity
@@ -42,8 +42,7 @@ class PeopleController < ApplicationController
   # DELETE /people/1
   # DELETE /people/1.json
   def destroy
-    @person = Person.find(params[:id])
-    @person.destroy
+    @person = Pusher.destroy_person(params)
 
     head :no_content
   end

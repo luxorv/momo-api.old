@@ -18,9 +18,9 @@ class ProducersController < ApplicationController
   # POST /producers
   # POST /producers.json
   def create
-    @producer = Producer.new(params[:producer])
+    @producer = Pusher.create_producer(params[:producer])
 
-    if @producer.save
+    if @producer.valid?
       render json: @producer, status: :created, location: @producer
     else
       render json: @producer.errors, status: :unprocessable_entity
@@ -30,9 +30,9 @@ class ProducersController < ApplicationController
   # PATCH/PUT /producers/1
   # PATCH/PUT /producers/1.json
   def update
-    @producer = Producer.find(params[:id])
+    @producer = Pusher.update_producer(params)
 
-    if @producer.update_attributes(params[:producer])
+    if @producer.valid?
       head :no_content
     else
       render json: @producer.errors, status: :unprocessable_entity
@@ -42,8 +42,7 @@ class ProducersController < ApplicationController
   # DELETE /producers/1
   # DELETE /producers/1.json
   def destroy
-    @producer = Producer.find(params[:id])
-    @producer.destroy
+    @producer = Pusher.destroy_producer(params)
 
     head :no_content
   end

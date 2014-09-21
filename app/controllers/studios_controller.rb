@@ -20,7 +20,7 @@ class StudiosController < ApplicationController
   def create
     @studio = Pusher.create_studio(params[:studio])
 
-    if @studio
+    if @studio.valid?
       render json: @studio, status: :created, location: @studio
     else
       render json: @studio.errors, status: :unprocessable_entity
@@ -32,7 +32,7 @@ class StudiosController < ApplicationController
   def update
     @studio = Pusher.update_studio(params)
 
-    if @studio
+    if @studio.valid?
       head :no_content
     else
       render json: @studio.errors, status: :unprocessable_entity

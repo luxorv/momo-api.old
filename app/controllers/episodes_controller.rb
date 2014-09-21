@@ -18,9 +18,9 @@ class EpisodesController < ApplicationController
   # POST /episodes
   # POST /episodes.json
   def create
-    @episode = Episode.new(params[:episode])
+    @episode = Pusher.create_episode(params[:episode])
 
-    if @episode.save
+    if @episode.valid?
       render json: @episode, status: :created, location: @episode
     else
       render json: @episode.errors, status: :unprocessable_entity
@@ -30,9 +30,9 @@ class EpisodesController < ApplicationController
   # PATCH/PUT /episodes/1
   # PATCH/PUT /episodes/1.json
   def update
-    @episode = Episode.find(params[:id])
+    @episode = Pusher.update_episode(params)
 
-    if @episode.update_attributes(params[:episode])
+    if @episode.valid?
       head :no_content
     else
       render json: @episode.errors, status: :unprocessable_entity
@@ -42,8 +42,7 @@ class EpisodesController < ApplicationController
   # DELETE /episodes/1
   # DELETE /episodes/1.json
   def destroy
-    @episode = Episode.find(params[:id])
-    @episode.destroy
+    @episode = Pusher.destroy_episode(params)
 
     head :no_content
   end

@@ -18,9 +18,9 @@ class MangasController < ApplicationController
   # POST /mangas
   # POST /mangas.json
   def create
-    @manga = Manga.new(params[:manga])
+    @manga = Pusher.create_manga(params[:manga])
 
-    if @manga.save
+    if @manga.valid?
       render json: @manga, status: :created, location: @manga
     else
       render json: @manga.errors, status: :unprocessable_entity
@@ -30,9 +30,9 @@ class MangasController < ApplicationController
   # PATCH/PUT /mangas/1
   # PATCH/PUT /mangas/1.json
   def update
-    @manga = Manga.find(params[:id])
+    @manga = Pusher.update_manga(params)
 
-    if @manga.update_attributes(params[:manga])
+    if @manga.valid?
       head :no_content
     else
       render json: @manga.errors, status: :unprocessable_entity
@@ -42,8 +42,7 @@ class MangasController < ApplicationController
   # DELETE /mangas/1
   # DELETE /mangas/1.json
   def destroy
-    @manga = Manga.find(params[:id])
-    @manga.destroy
+    @manga = Pusher.destroy_manga(params)
 
     head :no_content
   end

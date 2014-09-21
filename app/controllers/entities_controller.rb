@@ -18,9 +18,9 @@ class EntitiesController < ApplicationController
   # POST /entities
   # POST /entities.json
   def create
-    @entity = Entity.new(params[:entity])
+    @entity = Pusher.create_entity(params[:entity])
 
-    if @entity.save
+    if @entity.valid?
       render json: @entity, status: :created, location: @entity
     else
       render json: @entity.errors, status: :unprocessable_entity
@@ -30,9 +30,9 @@ class EntitiesController < ApplicationController
   # PATCH/PUT /entities/1
   # PATCH/PUT /entities/1.json
   def update
-    @entity = Entity.find(params[:id])
+    @entity = Pusher.update_entity(params)
 
-    if @entity.update_attributes(params[:entity])
+    if @entity.valid?
       head :no_content
     else
       render json: @entity.errors, status: :unprocessable_entity
@@ -42,8 +42,7 @@ class EntitiesController < ApplicationController
   # DELETE /entities/1
   # DELETE /entities/1.json
   def destroy
-    @entity = Entity.find(params[:id])
-    @entity.destroy
+    @entity = Pusher.destroy_entity(params)
 
     head :no_content
   end

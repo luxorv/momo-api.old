@@ -21,9 +21,9 @@ class GenresController < ApplicationController
   # POST /genres
   # POST /genres.json
   def create
-    @genre = Genre.new(params[:genre])
+    @genre = Pusher.create_genre(params[:genre])
 
-    if @genre.save
+    if @genre.valid?
       render json: @genre, status: :created, location: @genre
     else
       render json: @genre.errors, status: :unprocessable_entity
@@ -33,9 +33,9 @@ class GenresController < ApplicationController
   # PATCH/PUT /genres/1
   # PATCH/PUT /genres/1.json
   def update
-    @genre = Genre.find(params[:id])
+    @genre = Pusher.update_genre(params)
 
-    if @genre.update_attributes(params[:genre])
+    if @genre.valid?
       head :no_content
     else
       render json: @genre.errors, status: :unprocessable_entity
@@ -45,8 +45,7 @@ class GenresController < ApplicationController
   # DELETE /genres/1
   # DELETE /genres/1.json
   def destroy
-    @genre = Genre.find(params[:id])
-    @genre.destroy
+    @genre = Pusher.destroy_genre(params)
 
     head :no_content
   end

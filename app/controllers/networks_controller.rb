@@ -18,9 +18,9 @@ class NetworksController < ApplicationController
   # POST /networks
   # POST /networks.json
   def create
-    @network = Network.new(params[:network])
+    @network = Pusher.create_network(params[:network])
 
-    if @network.save
+    if @network.valid?
       render json: @network, status: :created, location: @network
     else
       render json: @network.errors, status: :unprocessable_entity
@@ -30,9 +30,9 @@ class NetworksController < ApplicationController
   # PATCH/PUT /networks/1
   # PATCH/PUT /networks/1.json
   def update
-    @network = Network.find(params[:id])
+    @network = Pusher.update_network(params)
 
-    if @network.update_attributes(params[:network])
+    if @network.valid?
       head :no_content
     else
       render json: @network.errors, status: :unprocessable_entity
@@ -42,8 +42,7 @@ class NetworksController < ApplicationController
   # DELETE /networks/1
   # DELETE /networks/1.json
   def destroy
-    @network = Network.find(params[:id])
-    @network.destroy
+    @network = Pusher.destroy_network(params)
 
     head :no_content
   end

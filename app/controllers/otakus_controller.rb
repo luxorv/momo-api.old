@@ -21,9 +21,9 @@ class OtakusController < ApplicationController
   # POST /otakus
   # POST /otakus.json
   def create
-    @otaku = Otaku.new(params[:otaku])
+    @otaku = Pusher.create_otaku(params[:otaku])
 
-    if @otaku.save
+    if @otaku.valid?
       render json: @otaku, status: :created, location: @otaku
     else
       render json: @otaku.errors, status: :unprocessable_entity
@@ -33,9 +33,9 @@ class OtakusController < ApplicationController
   # PATCH/PUT /otakus/1
   # PATCH/PUT /otakus/1.json
   def update
-    @otaku = Otaku.find(params[:id])
+    @otaku = Pusher.update_otaku(params)
 
-    if @otaku.update_attributes(params[:otaku])
+    if @otaku.valid?
       head :no_content
     else
       render json: @otaku.errors, status: :unprocessable_entity
@@ -45,8 +45,7 @@ class OtakusController < ApplicationController
   # DELETE /otakus/1
   # DELETE /otakus/1.json
   def destroy
-    @otaku = Otaku.find(params[:id])
-    @otaku.destroy
+    @otaku = Pusher.destroy_otaku(params)
 
     head :no_content
   end
