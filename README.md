@@ -1,7 +1,6 @@
 Momo-api
 ========
 
-<<<<<<< HEAD
 This is the official API for the momo application family.
 =======
 Momo API official repository
@@ -16,6 +15,3 @@ To test files just run ```bundle exec rspec``` on project root folder.
 - FactoryGirl Rails [https://github.com/thoughtbot/factory_girl]
 - Rspec Rails [https://github.com/rspec/rspec-rails]
 
-
-
->>>>>>> devel
