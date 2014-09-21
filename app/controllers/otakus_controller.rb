@@ -13,7 +13,8 @@ class OtakusController < ApplicationController
   # GET /otakus/1
   # GET /otakus/1.json
   def show
-    @otaku = Otaku.find(params[:id])
+    @otaku = Finder.find_otaku_by_id params[:id]
+    @otaku ||= KiWi.show_otaku params[:id]
 
     render json: @otaku
   end

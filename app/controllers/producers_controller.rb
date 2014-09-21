@@ -10,7 +10,8 @@ class ProducersController < ApplicationController
   # GET /producers/1
   # GET /producers/1.json
   def show
-    @producer = KiWi.show_producer params[:id]
+    @producer = Finder.find_producer_by_id params[:id]
+    @producer ||= KiWi.show_producer params[:id]
 
     render json: @producer
   end

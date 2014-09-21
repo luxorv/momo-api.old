@@ -10,7 +10,8 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.json
   def show
-    @person = KiWi.show_person params[:id]
+    @person = Finder.find_person_by_id params[:id]
+    @person ||= KiWi.show_person params[:id]
 
     render json: @person
   end

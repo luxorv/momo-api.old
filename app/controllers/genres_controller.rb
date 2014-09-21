@@ -13,7 +13,8 @@ class GenresController < ApplicationController
   # GET /genres/1
   # GET /genres/1.json
   def show
-    @genre = KiWi.show_genre params[:id]
+    @genre = Finder.find_genre_by_id params[:id]
+    @genre ||= KiWi.show_genre params[:id]
 
     render json: @genre
   end

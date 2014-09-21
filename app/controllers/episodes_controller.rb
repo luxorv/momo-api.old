@@ -10,7 +10,8 @@ class EpisodesController < ApplicationController
   # GET /episodes/1
   # GET /episodes/1.json
   def show
-    @episode = KiWi.show_episode params[:id]
+    @episode = Finder.find_episode_by_id params[:id]
+    @episode ||= KiWi.show_episode params[:id]
 
     render json: @episode
   end
