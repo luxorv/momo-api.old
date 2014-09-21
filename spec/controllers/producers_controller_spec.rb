@@ -28,6 +28,7 @@ RSpec.describe ProducersController, :type => :controller do
   }
 
   let(:invalid_attributes) {
+    attrs = attributes_for :genre
   }
 
   # This should return the minimal set of values that should be in the session
@@ -47,8 +48,86 @@ RSpec.describe ProducersController, :type => :controller do
     it "assigns the requested producer as @producer" do
       producer = Producer.create! valid_attributes
       get :show, {:id => producer.to_param}, valid_session
-      expect(assigns(:producer)).to eq(producer)
+      expect(assigns(:producer).first).to eq(producer)
     end
+  end
+
+  describe "POST create" do
+    it "should create a new producer with Pusher" do
+
+      params = {:producer => valid_attributes}
+      post :create, params, valid_session
+
+      producer = assigns(:producer)
+
+      # binding.pry
+
+      expect(producer).to be_an(Producer)
+      expect(producer.name).to be_a(String)
+      expect(producer.description).to be_a(String)
+
+      expect(producer.errors.size).to  eq(0)
+    end
+
+    it "should fail creating a new producer with Pusher" do
+
+      params = {:not_producer => valid_attributes}
+      post :create, params, valid_session
+
+      producer = assigns(:producer)
+
+      expect(producer.errors.size).to_not  eq(0)
+      puts producer.errors
+    end
+  end
+
+  describe "PUT update" do
+    it "should update an producer with Pusher" do
+
+      id = Producer.first.id;
+      attrs = valid_attributes
+      attrs[:name] = "Name #{Time.now.to_s}"
+      params = {:id => id, :producer => attrs}
+      # binding.pry
+      put :update, params, valid_session
+
+      producer = assigns(:producer)
+
+      # binding.pry
+
+      expect(producer).to be_an(Producer)
+      expect(producer.name).to eq(valid_attributes[:name])
+
+      expect(producer.errors.size).to  eq(0)
+    end
+
+    it "should fail updating an producer with Pusher" do
+
+      id = Producer.first.id;
+      attrs = valid_attributes
+      attrs[:name] = nil
+
+      params = {:id => id, :producer => attrs}
+      put :update, params, valid_session
+
+
+      producer = assigns(:producer)
+
+      # binding.pry
+      expect(producer.errors.size).not_to  eq(0)
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "should delete an producer with Pusher" do
+
+      producer = Producer.first
+
+      delete :destroy, {:id => producer.id}, valid_session
+
+      expect(producer).not_to eq(Producer.first)
+    end
+
   end
 
 end
