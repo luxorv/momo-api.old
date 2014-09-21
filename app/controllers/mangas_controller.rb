@@ -10,7 +10,8 @@ class MangasController < ApplicationController
   # GET /mangas/1
   # GET /mangas/1.json
   def show
-    @manga =KiWi.show_manga params[:id]
+    @manga = Finder.find_manga_by_id params[:id]
+    @manga ||= KiWi.show_manga params[:id]
 
     render json: @manga
   end

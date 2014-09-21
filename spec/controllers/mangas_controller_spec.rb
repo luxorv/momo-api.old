@@ -28,6 +28,7 @@ RSpec.describe MangasController, :type => :controller do
   }
 
   let(:invalid_attributes) {
+    attrs = attributes_for :genre
   }
 
   # This should return the minimal set of values that should be in the session
@@ -37,9 +38,9 @@ RSpec.describe MangasController, :type => :controller do
 
   describe "GET index" do
     it "assigns all mangas as @mangas" do
-      manga = Manga.all.to_json
+      mangas = Manga.all
       get :index, {}, valid_session
-      expect(assigns(:mangas).to_json).to eq(manga)
+      expect(assigns(:mangas).to_json).to eq(mangas.to_json)
     end
   end
 
@@ -47,8 +48,86 @@ RSpec.describe MangasController, :type => :controller do
     it "assigns the requested manga as @manga" do
       manga = Manga.create! valid_attributes
       get :show, {:id => manga.to_param}, valid_session
-      expect(assigns(:manga)).to eq(manga)
+      expect(assigns(:manga).first).to eq(manga)
     end
+  end
+
+  describe "POST create" do
+    it "should create a new manga with Pusher" do
+
+      params = {:manga => valid_attributes}
+      post :create, params, valid_session
+
+      manga = assigns(:manga)
+
+      # binding.pry
+
+      expect(manga).to be_an(Manga)
+      expect(manga.name).to be_a(String)
+      expect(manga.description).to be_a(String)
+
+      expect(manga.errors.size).to  eq(0)
+    end
+
+    it "should fail creating a new manga with Pusher" do
+
+      params = {:not_manga => valid_attributes}
+      post :create, params, valid_session
+
+      manga = assigns(:manga)
+
+      expect(manga.errors.size).to_not  eq(0)
+      puts manga.errors
+    end
+  end
+
+  describe "PUT update" do
+    it "should update an manga with Pusher" do
+
+      id = Manga.first.id;
+      attrs = valid_attributes
+      attrs[:name] = "Name #{Time.now.to_s}"
+      params = {:id => id, :manga => attrs}
+      # binding.pry
+      put :update, params, valid_session
+
+      manga = assigns(:manga)
+
+      # binding.pry
+
+      expect(manga).to be_an(Manga)
+      expect(manga.name).to eq(valid_attributes[:name])
+
+      expect(manga.errors.size).to  eq(0)
+    end
+
+    it "should fail updating an manga with Pusher" do
+
+      id = Manga.first.id;
+      attrs = valid_attributes
+      attrs[:name] = nil
+
+      params = {:id => id, :manga => attrs}
+      put :update, params, valid_session
+
+
+      manga = assigns(:manga)
+
+      # binding.pry
+      expect(manga.errors.size).not_to  eq(0)
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "should delete an manga with Pusher" do
+
+      manga = Manga.first
+
+      delete :destroy, {:id => manga.id}, valid_session
+
+      expect(manga).not_to eq(Manga.first)
+    end
+
   end
 
 end
