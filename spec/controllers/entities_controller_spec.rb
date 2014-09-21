@@ -76,8 +76,6 @@ RSpec.describe EntitiesController, :type => :controller do
 
       entity = assigns(:entity)
 
-      binding.pry
-
       expect(entity.errors.size).to_not eq(0)
       puts entity.errors
     end

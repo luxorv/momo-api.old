@@ -11,6 +11,9 @@ class Episode
   field :season, type: Integer
   field :popularity, type: Float
 
+  validates :name, allow_nil: false, allow_blank: false, presence: true
+  validates :number, allow_nil: false, allow_blank: false, presence: true
+
   # field :anime, type: Anime
 
 

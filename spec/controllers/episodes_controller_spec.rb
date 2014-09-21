@@ -24,11 +24,11 @@ RSpec.describe EpisodesController, :type => :controller do
   # Episode. As you add validations to Episode, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    attrs = attributes_for :episode
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    attrs = attributes_for :genre
   }
 
   # This should return the minimal set of values that should be in the session
@@ -38,9 +38,9 @@ RSpec.describe EpisodesController, :type => :controller do
 
   describe "GET index" do
     it "assigns all episodes as @episodes" do
-      episode = Episode.create! valid_attributes
+      episodes = Episode.all
       get :index, {}, valid_session
-      expect(assigns(:episodes)).to eq([episode])
+      expect(assigns(:episodes).to_json).to eq(episodes.to_json)
     end
   end
 
@@ -48,8 +48,86 @@ RSpec.describe EpisodesController, :type => :controller do
     it "assigns the requested episode as @episode" do
       episode = Episode.create! valid_attributes
       get :show, {:id => episode.to_param}, valid_session
-      expect(assigns(:episode)).to eq(episode)
+      expect(assigns(:episode).first).to eq(episode)
     end
+  end
+
+  describe "POST create" do
+    it "should create a new episode with Pusher" do
+
+      params = {:episode => valid_attributes}
+      post :create, params, valid_session
+
+      episode = assigns(:episode)
+
+      # binding.pry
+
+      expect(episode).to be_an(Episode)
+      expect(episode.name).to be_a(String)
+      expect(episode.synopsis).to be_a(String)
+
+      expect(episode.errors.size).to  eq(0)
+    end
+
+    it "should fail creating a new episode with Pusher" do
+
+      params = {:not_episode => valid_attributes}
+      post :create, params, valid_session
+
+      episode = assigns(:episode)
+
+      expect(episode.errors.size).to_not  eq(0)
+      puts episode.errors
+    end
+  end
+
+  describe "PUT update" do
+    it "should update an episode with Pusher" do
+
+      id = Episode.first.id;
+      attrs = valid_attributes
+      attrs[:name] = "Name #{Time.now.to_s}"
+      params = {:id => id, :episode => attrs}
+      # binding.pry
+      put :update, params, valid_session
+
+      episode = assigns(:episode)
+
+      # binding.pry
+
+      expect(episode).to be_an(Episode)
+      expect(episode.name).to eq(valid_attributes[:name])
+
+      expect(episode.errors.size).to  eq(0)
+    end
+
+    it "should fail updating an episode with Pusher" do
+
+      id = Episode.first.id;
+      attrs = valid_attributes
+      attrs[:name] = nil
+
+      params = {:id => id, :episode => attrs}
+      put :update, params, valid_session
+
+
+      episode = assigns(:episode)
+
+      # binding.pry
+      expect(episode.errors.size).not_to  eq(0)
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "should delete an episode with Pusher" do
+
+      episode = Episode.first
+
+      delete :destroy, {:id => episode.id}, valid_session
+
+      expect(episode).not_to eq(Episode.first)
+    end
+
   end
 
 end
