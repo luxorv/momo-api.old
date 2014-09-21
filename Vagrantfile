@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_check_update = false
   config.vm.network "forwarded_port", guest: 3000, host: 80
 
-  config.vm.network "public_network"
+  # config.vm.network :bridged
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false

@@ -1,0 +1,1 @@
+Momo::Application.config.secret_token = '3d037d903e47d0da62ccc6c0fa7bb413ddeeb8e3ddbba20f315d31ba9ee5cc74d90262ef177b3c132da038e4cc94dce86d439290116e63c3705c1fee3691d734'
