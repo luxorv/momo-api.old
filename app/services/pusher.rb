@@ -84,7 +84,7 @@ class Pusher
   end
 
   def self.destroy_model(model, args, &block)
-    model = eval "return Finder.find_#{model}_by_id('#{args['id']}').first"
+    model = eval "Finder.find_#{model}_by_id('#{args['id']}').first"
     return model.destroy
   end
   #
