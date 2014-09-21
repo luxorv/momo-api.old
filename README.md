@@ -6,6 +6,30 @@ This is the official API for the momo application family.
 Momo API official repository
 
 
+Contributing
+-------
+To start developing for ***momo*** we recommend you to use our vagrant environment, though is not required.
+
+**Running on Vagrant:**
+  - Install vagrant [http://www.vagrantup.com/]
+  - Install VirtualBox [https://www.virtualbox.org/]
+  - Clone repo and do:
+
+  ```
+  cd <project directory>
+  vagrant up
+  vagrant-setup.ssh <github username> <github email>
+  ```
+
+**Without Vagrant:**
+  - setup your ruby environment (required ruby version >= 1.9)
+  - clone repo
+  
+  ```
+    cd <project directory>
+    bundle install
+  ```
+
 Testing
 -------
 
