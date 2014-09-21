@@ -1,6 +1,26 @@
 #!/bin/bash
 #Based on https://gorails.com/setup/ubuntu/14.04
 
+help="Usage:\n\n$0 <your github username> <your github email>"
+
+if [ -n "$1" ]
+then
+    echo "DEVELOPER_NAME=$1"
+    DEVELOPER_NAME=$1
+else
+    echo -e $help
+    exit 1
+fi
+
+if [ -n "$2" ]
+then
+    echo "DEVELOPER_EMAIL=$2"
+    DEVELOPER_EMAIL=$2
+else
+    echo -e $help
+    exit 1
+fi
+
 #link project to home
 vagrant ssh -c "ln -s /vagrant/ ./ & mv vagrant project"
 
@@ -28,9 +48,9 @@ vagrant ssh -c "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
 
 #configure git
 vagrant ssh -c "git config --global color.ui true"
-vagrant ssh -c "git config --global user.name rapito"
-vagrant ssh -c "git config --global user.email robert.apb@hotmail.com"
-vagrant ssh -c "ssh-keygen -t rsa -C robert.apb@hotmail.com"
+vagrant ssh -c "git config --global user.name $DEVELOPER_NAME"
+vagrant ssh -c "git config --global user.email $DEVELOPER_EMAIL"
+vagrant ssh -c "ssh-keygen -t rsa -C $DEVELOPER_EMAIL"
 echo "Copy your public key and paste in github!"
 vagrant ssh -c "cat ~/.ssh/id_rsa.pub"
 
