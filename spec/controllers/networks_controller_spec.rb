@@ -28,6 +28,7 @@ RSpec.describe NetworksController, :type => :controller do
   }
 
   let(:invalid_attributes) {
+    attrs = attributes_for :genre
   }
 
   # This should return the minimal set of values that should be in the session
@@ -37,9 +38,9 @@ RSpec.describe NetworksController, :type => :controller do
 
   describe "GET index" do
     it "assigns all networks as @networks" do
-      network = Network.all.to_json
+      networks = Network.all
       get :index, {}, valid_session
-      expect(assigns(:networks).to_json).to eq(network)
+      expect(assigns(:networks).to_json).to eq(networks.to_json)
     end
   end
 
@@ -47,8 +48,86 @@ RSpec.describe NetworksController, :type => :controller do
     it "assigns the requested network as @network" do
       network = Network.create! valid_attributes
       get :show, {:id => network.to_param}, valid_session
-      expect(assigns(:network)).to eq(network)
+      expect(assigns(:network).first).to eq(network)
     end
+  end
+
+  describe "POST create" do
+    it "should create a new network with Pusher" do
+
+      params = {:network => valid_attributes}
+      post :create, params, valid_session
+
+      network = assigns(:network)
+
+      # binding.pry
+
+      expect(network).to be_an(Network)
+      expect(network.name).to be_a(String)
+      expect(network.description).to be_a(String)
+
+      expect(network.errors.size).to  eq(0)
+    end
+
+    it "should fail creating a new network with Pusher" do
+
+      params = {:not_network => valid_attributes}
+      post :create, params, valid_session
+
+      network = assigns(:network)
+
+      expect(network.errors.size).to_not  eq(0)
+      puts network.errors
+    end
+  end
+
+  describe "PUT update" do
+    it "should update an network with Pusher" do
+
+      id = Network.first.id;
+      attrs = valid_attributes
+      attrs[:name] = "Name #{Time.now.to_s}"
+      params = {:id => id, :network => attrs}
+      # binding.pry
+      put :update, params, valid_session
+
+      network = assigns(:network)
+
+      # binding.pry
+
+      expect(network).to be_an(Network)
+      expect(network.name).to eq(valid_attributes[:name])
+
+      expect(network.errors.size).to  eq(0)
+    end
+
+    it "should fail updating an network with Pusher" do
+
+      id = Network.first.id;
+      attrs = valid_attributes
+      attrs[:name] = nil
+
+      params = {:id => id, :network => attrs}
+      put :update, params, valid_session
+
+
+      network = assigns(:network)
+
+      # binding.pry
+      expect(network.errors.size).not_to  eq(0)
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "should delete an network with Pusher" do
+
+      network = Network.first
+
+      delete :destroy, {:id => network.id}, valid_session
+
+      expect(network).not_to eq(Network.first)
+    end
+
   end
 
 

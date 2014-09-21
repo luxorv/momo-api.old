@@ -10,7 +10,8 @@ class NetworksController < ApplicationController
   # GET /networks/1
   # GET /networks/1.json
   def show
-    @network = KiWi.show_network params[:id]
+    @network = Finder.find_network_by_id params[:id]
+    @network ||= KiWi.show_network params[:id]
 
     render json: @network
   end
