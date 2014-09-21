@@ -10,7 +10,8 @@ class EntitiesController < ApplicationController
   # GET /entities/1
   # GET /entities/1.json
   def show
-    @entity = KiWi.show_entity params[:id]
+    @entity = Finder.find_entity_by_id params[:id]
+    @entity ||= KiWi.show_entity params[:id]
 
     render json: @entity
   end

@@ -24,23 +24,23 @@ RSpec.describe EntitiesController, :type => :controller do
   # Entity. As you add validations to Entity, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    attr = attributes_for :entity
+    attrs = attributes_for :entity
   }
 
   let(:invalid_attributes) {
-
+    attrs = attributes_for :genre
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # EntitiesController. Be sure to keep this updated too.
+  # EntitysController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET index" do
     it "assigns all entities as @entities" do
-      entity = Entity.all.to_json
+      entities = Entity.all
       get :index, {}, valid_session
-      expect(assigns(:entities).to_json).to eq(entity)
+      expect(assigns(:entities).to_json).to eq(entities.to_json)
     end
   end
 
@@ -48,8 +48,88 @@ RSpec.describe EntitiesController, :type => :controller do
     it "assigns the requested entity as @entity" do
       entity = Entity.create! valid_attributes
       get :show, {:id => entity.to_param}, valid_session
-      expect(assigns(:entity)).to eq(entity)
+      expect(assigns(:entity).first).to eq(entity)
     end
+  end
+
+  describe "POST create" do
+    it "should create a new entity with Pusher" do
+
+      params = {:entity => valid_attributes}
+      post :create, params, valid_session
+
+      entity = assigns(:entity)
+
+      # binding.pry
+
+      expect(entity).to be_an(Entity)
+      expect(entity.name).to be_a(String)
+      expect(entity.description).to be_a(String)
+
+      expect(entity.errors.size).to eq(0)
+    end
+
+    it "should fail creating a new entity with Pusher" do
+
+      params = {:not_entity => invalid_attributes}
+      post :create, params, valid_session
+
+      entity = assigns(:entity)
+
+      binding.pry
+
+      expect(entity.errors.size).to_not eq(0)
+      puts entity.errors
+    end
+  end
+
+  describe "PUT update" do
+    it "should update an entity with Pusher" do
+
+      id = Entity.first.id;
+      attrs = valid_attributes
+      attrs[:name] = "Name #{Time.now.to_s}"
+      params = {:id => id, :entity => attrs}
+      # binding.pry
+      put :update, params, valid_session
+
+      entity = assigns(:entity)
+
+      # binding.pry
+
+      expect(entity).to be_an(Entity)
+      expect(entity.name).to eq(valid_attributes[:name])
+
+      expect(entity.errors.size).to eq(0)
+    end
+
+    it "should fail updating an entity with Pusher" do
+
+      id = Entity.first.id;
+      attrs = valid_attributes
+      attrs[:name] = nil
+
+      params = {:id => id, :entity => attrs}
+      put :update, params, valid_session
+
+
+      entity = assigns(:entity)
+
+      # binding.pry
+      expect(entity.errors.size).not_to eq(0)
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "should delete an entity with Pusher" do
+
+      entity = Entity.first
+
+      delete :destroy, {:id => entity.id}, valid_session
+
+      expect(entity).not_to eq(Entity.first)
+    end
+
   end
 
 end

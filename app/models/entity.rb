@@ -8,6 +8,10 @@ class Entity
 
   scope :films, where(entity_type: :film)
 
+  # validations
+  validates :name, allow_nil: false, allow_blank: false, presence: true
+  validates :description, allow_nil: false, allow_blank: false, presence: true
+
   before_create :set_entity_type
 
   def set_entity_type
