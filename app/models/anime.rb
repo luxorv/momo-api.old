@@ -43,5 +43,9 @@ class Anime < Entity
   has_and_belongs_to_many :prequels, :class_name => 'Anime'
   has_and_belongs_to_many :genres
 
+  # has_and_belongs_to_many :otakus, inverse_of: 'watch_list'
+  # has_and_belongs_to_many :otakus, inverse_of: 'watching_list'
+  # has_and_belongs_to_many :otakus, inverse_of: 'watched_list'
+
   search_in :name
 end

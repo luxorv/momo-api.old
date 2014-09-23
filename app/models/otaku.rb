@@ -45,4 +45,16 @@ class Otaku
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+
+  ## Momo Features
+  field :watch_list, type: Array
+  field :watching_list, type: Array
+  field :watched_list, type: Array
+
+
+
+  has_and_belongs_to_many :watch_list, :class_name => 'Anime'
+  has_and_belongs_to_many :watching_list, :class_name => 'Anime'
+  has_and_belongs_to_many :watched_list, :class_name => 'Anime'
+
 end

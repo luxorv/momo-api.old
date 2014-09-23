@@ -29,5 +29,13 @@ FactoryGirl.define do
     # remember_created_at
 
     ## Trackable
+
+    watch_list []
+    watching_list []
+    watched_list []
+
+    after(:create) { |otaku| otaku.watch_list = create_list(:anime, 2)}
+    after(:create) { |otaku| otaku.watching_list = build_list(:anime, 1)}
+    after(:create) { |otaku| otaku.watched_list = build_list(:anime, 1)}
   end
 end

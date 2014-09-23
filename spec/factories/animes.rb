@@ -21,12 +21,13 @@ FactoryGirl.define do
     end_run_date Date.today
     association :manga, factory: :manga
 
+
+
     after(:create) { |anime| anime.genres = build_list(:genre, 2)}
     after(:create) { |anime| anime.episodes = create_list(:episode, 5)}
     after(:create) { |anime| anime.films = create_list(:entity, 5, entity_type: :Film)}
     after(:create) { |anime| anime.licenses = create_list(:producer, 5)}
     after(:create) { |anime| anime.sequels = build_list(:anime, 1)}
     after(:create) { |anime| anime.prequels = build_list(:anime, 2)}
-
   end
 end
