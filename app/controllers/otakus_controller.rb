@@ -1,6 +1,6 @@
 class OtakusController < ApplicationController
 
-  acts_as_token_authentication_handler_for Otaku, :except => [:index,:show]
+  acts_as_token_authentication_handler_for Otaku, :except => [:index, :show]
 
   # GET /otakus
   # GET /otakus.json
@@ -50,4 +50,51 @@ class OtakusController < ApplicationController
 
     head :no_content
   end
+
+  # Adds an anime to an otaku's watch list
+  def add_to_watch_list
+
+    @otaku = Finder.find_otaku_by_id params[:otaku_id]
+    anime = Anime.get_anime params[:anime_id]
+
+    @otaku.watch_list.push anime
+
+    if @otaku.save!
+      render json: @otaku
+    else
+      head :no_content
+    end
+  end
+
+  # Adds an anime to an otaku's watched list
+  def add_to_watched_list
+
+    @otaku = Finder.find_otaku_by_id params[:otaku_id]
+    anime = Anime.get_anime params[:anime_id]
+
+    @otaku.watched_list.push anime
+
+    if @otaku.save!
+      render json: @otaku
+    else
+      head :no_content
+    end
+  end
+
+  # Adds an anime to an otaku's watching list
+  def add_to_watching_list
+
+    @otaku = Finder.find_otaku_by_id params[:otaku_id]
+    anime = Anime.get_anime params[:anime_id]
+
+    @otaku.watching_list.push anime
+
+    if @otaku.save!
+      render json: @otaku
+    else
+      head :no_content
+    end
+  end
+
+
 end

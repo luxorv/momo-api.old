@@ -51,10 +51,9 @@ class Otaku
   field :watching_list, type: Array
   field :watched_list, type: Array
 
-
-
   has_and_belongs_to_many :watch_list, :class_name => 'Anime'
   has_and_belongs_to_many :watching_list, :class_name => 'Anime'
   has_and_belongs_to_many :watched_list, :class_name => 'Anime'
+
 
 end

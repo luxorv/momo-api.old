@@ -48,4 +48,15 @@ class Anime < Entity
   # has_and_belongs_to_many :otakus, inverse_of: 'watched_list'
 
   search_in :name
+
+
+  def self.get_anime(id)
+    if id.is_a? Anime
+      anime = id
+    else
+      anime = Finder.find_anime_by_id id
+    end
+    anime
+  end
+
 end

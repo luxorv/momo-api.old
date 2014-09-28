@@ -23,7 +23,7 @@ class AnimesController < ApplicationController
   def search
     method = build_finder_method
 
- #   binding.pry
+    #   binding.pry
     @animes = eval "Finder.#{method[:name]}(#{method[:args]})"
 
     render json: @animes
@@ -63,30 +63,30 @@ class AnimesController < ApplicationController
 
   private
 
-    def filter_search_params
-      search_params = {}
+  def filter_search_params
+    search_params = {}
 
-      params.each do |key, value|
-        search_params[key] = value if key != "action" and key != "controller"
-      end
-
-      search_params
+    params.each do |key, value|
+      search_params[key] = value if key != "action" and key != "controller"
     end
 
-    def build_finder_method
+    search_params
+  end
 
-      new_params = filter_search_params
-      method_name = "find_anime_by_"
-      args = []
-      index = 0
+  def build_finder_method
 
-      new_params.each do |key, value|
-        index += 1
-        method_name += "#{key}"
-        args << value
-        method_name += "_and_" if index < new_params.size
-      end
+    new_params = filter_search_params
+    method_name = "find_anime_by_"
+    args = []
+    index = 0
 
-      {name: method_name, args: args}
+    new_params.each do |key, value|
+      index += 1
+      method_name += "#{key}"
+      args << value
+      method_name += "_and_" if index < new_params.size
     end
+
+    {name: method_name, args: args}
+  end
 end
