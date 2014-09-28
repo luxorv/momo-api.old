@@ -102,9 +102,10 @@ RSpec.describe OtakusController, :type => :controller do
 
     it 'should add anime to watch list' do
       anime = Anime.first
-      params = {:otaku_id => Otaku.first.id, :anime_id => anime.id}
+      params = {:id => Otaku.first.id, :anime_id => anime.id}
+      params = params.merge auth_params
 
-      post :add_to_watch_list, params, valid_session
+      get :add_to_watch_list, params, valid_session
 
       otaku = assigns(:otaku)
 
@@ -114,10 +115,10 @@ RSpec.describe OtakusController, :type => :controller do
 
     it 'should add anime to watching list' do
       anime = Anime.first
-      params = {:otaku_id => Otaku.first.id, :anime_id => anime.id}
+      params = {:id => Otaku.first.id, :anime_id => anime.id}
+      params = params.merge auth_params
 
-      post :add_to_watching_list, params, valid_session
-
+      get :add_to_watching_list, params, valid_session
       otaku = assigns(:otaku)
 
       expect(otaku).to be_an(Otaku)
@@ -126,9 +127,10 @@ RSpec.describe OtakusController, :type => :controller do
 
     it 'should add anime to watched list' do
       anime = Anime.first
-      params = {:otaku_id => Otaku.first.id, :anime_id => anime.id}
+      params = {:id => Otaku.first.id, :anime_id => anime.id}
+      params = params.merge auth_params
 
-      post :add_to_watched_list, params, valid_session
+      get :add_to_watched_list, params, valid_session
 
       otaku = assigns(:otaku)
 

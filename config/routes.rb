@@ -14,9 +14,9 @@ Momo::Application.routes.draw do
     put    '/otakus' => 'devise/registrations#update'
     delete '/otakus' => 'devise/registrations#destroy'
 
-    post   '/otakus/:id/add/watch' => 'otakus#add_to_watch_list'
-    post   '/otakus/:id/add/watched' => 'otakus#add_to_watched_list'
-    post   '/otakus/:id/add/watching' => 'otakus#add_to_watching_list'
+    get   '/otakus/:id/add/watch/:anime_id' => 'otakus#add_to_watch_list'
+    get   '/otakus/:id/add/watched/:anime_id' => 'otakus#add_to_watched_list'
+    get   '/otakus/:id/add/watching/:anime_id' => 'otakus#add_to_watching_list'
   end
 
   # resources :bentos, only: [:create, :destroy]

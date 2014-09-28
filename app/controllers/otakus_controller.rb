@@ -52,52 +52,59 @@ class OtakusController < ApplicationController
   end
 
   # Adds an anime to an otaku's watch list
-  # POST /otakus/add/watch
+  # POST /otakus/:id/add/watch/:anime_id
   def add_to_watch_list
-
-    @otaku = Finder.find_otaku_by_id params[:otaku_id]
+    @otaku = Finder.find_otaku_by_id params[:id]
     anime = Anime.get_anime params[:anime_id]
 
-    @otaku.watch_list.push anime
-
-    if @otaku.save!
-      render json: @otaku
-    else
-      head :no_content
-    end
+    @otaku = add_to_list @otaku,'watch_list', anime
   end
 
-  # Adds an anime to an otaku's watched list
-  # POST /otakus/add/watched
+
+# Adds an anime to an otaku's watched list
+# POST /otakus/:id/add/watched/:anime_id
   def add_to_watched_list
 
-    @otaku = Finder.find_otaku_by_id params[:otaku_id]
+    @otaku = Finder.find_otaku_by_id params[:id]
     anime = Anime.get_anime params[:anime_id]
 
-    @otaku.watched_list.push anime
-
-    if @otaku.save!
-      render json: @otaku
-    else
-      head :no_content
-    end
+    @otaku = add_to_list @otaku,'watched_list', anime
   end
 
-  # Adds an anime to an otaku's watching list
-  # POST /otakus/add/watching
+# Adds an anime to an otaku's watching list
+# POST /otakus/:id/add/watching/:anime_id
   def add_to_watching_list
 
-    @otaku = Finder.find_otaku_by_id params[:otaku_id]
+    @otaku = Finder.find_otaku_by_id params[:id]
     anime = Anime.get_anime params[:anime_id]
 
-    @otaku.watching_list.push anime
-
-    if @otaku.save!
-      render json: @otaku
-    else
-      head :no_content
-    end
+    @otaku = add_to_list @otaku,'watching_list', anime
   end
 
+
+  private
+  def add_to_list(otaku,list,anime)
+    err = false
+
+    if anime.size > 0 and otaku.size > 0
+      otaku = otaku.first
+      anime = anime.first
+
+      otaku.send(list.to_sym).push anime
+
+      if otaku.save!
+        render json: otaku
+      else
+        err = true
+      end
+    else
+      err = true;
+    end
+
+    head :no_content if err
+
+    return otaku
+
+  end
 
 end
