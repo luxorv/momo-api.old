@@ -7,6 +7,7 @@ require 'factory_girl_rails'
 
 
   FactoryGirl.create :entity
+  FactoryGirl.create :anime_rate
 
   FactoryGirl.create :genre
   FactoryGirl.create :manga

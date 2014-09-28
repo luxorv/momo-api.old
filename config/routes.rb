@@ -1,5 +1,7 @@
 Momo::Application.routes.draw do
 
+  resources :anime_rates, except: [:new, :edit]
+
   devise_for :otaku, :skip => [:sessions]
   devise_scope :otaku do
 
