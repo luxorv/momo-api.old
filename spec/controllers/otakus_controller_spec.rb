@@ -140,6 +140,48 @@ RSpec.describe OtakusController, :type => :controller do
 
   end
 
+  describe 'DELETE lists' do
+
+    it 'should remove anime from watch list' do
+      anime = Anime.first
+      params = {:id => Otaku.first.id, :anime_id => anime.id}
+      params = params.merge auth_params
+
+      delete :remove_from_watch_list, params, valid_session
+
+      otaku = assigns(:otaku)
+
+      expect(otaku).to be_an(Otaku)
+      expect(otaku.watch_list.last).to_not eql(anime)
+    end
+
+    it 'should remove anime from watching list' do
+      anime = Anime.first
+      params = {:id => Otaku.first.id, :anime_id => anime.id}
+      params = params.merge auth_params
+
+      delete :remove_from_watching_list, params, valid_session
+      otaku = assigns(:otaku)
+
+      expect(otaku).to be_an(Otaku)
+      expect(otaku.watching_list.last).to_not eql(anime)
+    end
+
+    it 'should remove anime from watched list' do
+      anime = Anime.first
+      params = {:id => Otaku.first.id, :anime_id => anime.id}
+      params = params.merge auth_params
+
+      delete :remove_from_watched_list, params, valid_session
+
+      otaku = assigns(:otaku)
+
+      expect(otaku).to be_an(Otaku)
+      expect(otaku.watched_list.last).to_not eql(anime)
+    end
+
+  end
+
   describe 'PUT update' do
     it 'should update an otaku with Pusher' do
 

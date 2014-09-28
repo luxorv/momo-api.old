@@ -17,6 +17,10 @@ Momo::Application.routes.draw do
     post   '/otakus/:id/watch/:anime_id' => 'otakus#add_to_watch_list'
     post   '/otakus/:id/watched/:anime_id' => 'otakus#add_to_watched_list'
     post   '/otakus/:id/watching/:anime_id' => 'otakus#add_to_watching_list'
+
+    delete   '/otakus/:id/watch/:anime_id' => 'otakus#remove_from_watch_list'
+    delete   '/otakus/:id/watched/:anime_id' => 'otakus#remove_from_watched_list'
+    delete   '/otakus/:id/watching/:anime_id' => 'otakus#remove_from_watching_list'
   end
 
   # resources :bentos, only: [:create, :destroy]

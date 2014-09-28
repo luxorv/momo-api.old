@@ -57,33 +57,60 @@ class OtakusController < ApplicationController
     @otaku = Finder.find_otaku_by_id params[:id]
     anime = Anime.get_anime params[:anime_id]
 
-    @otaku = add_to_list @otaku,'watch_list', anime
+    @otaku = add_to_list @otaku, 'watch_list', anime
   end
 
-
-# Adds an anime to an otaku's watched list
-# POST /otakus/:id/add/watched/:anime_id
+  # Adds an anime to an otaku's watched list
+  # POST /otakus/:id/add/watched/:anime_id
   def add_to_watched_list
 
     @otaku = Finder.find_otaku_by_id params[:id]
     anime = Anime.get_anime params[:anime_id]
 
-    @otaku = add_to_list @otaku,'watched_list', anime
+    @otaku = add_to_list @otaku, 'watched_list', anime
   end
 
-# Adds an anime to an otaku's watching list
-# POST /otakus/:id/add/watching/:anime_id
+  # Adds an anime to an otaku's watching list
+  # POST /otakus/:id/add/watching/:anime_id
   def add_to_watching_list
 
     @otaku = Finder.find_otaku_by_id params[:id]
     anime = Anime.get_anime params[:anime_id]
 
-    @otaku = add_to_list @otaku,'watching_list', anime
+    @otaku = add_to_list @otaku, 'watching_list', anime
   end
 
+  # Adds an anime to an otaku's watch list
+  # POST /otakus/:id/add/watch/:anime_id
+  def remove_from_watch_list
+    @otaku = Finder.find_otaku_by_id params[:id]
+    anime = Anime.get_anime params[:anime_id]
+
+    @otaku = remove_from_list @otaku, 'watch_list', anime
+  end
+
+  # Adds an anime to an otaku's watched list
+  # POST /otakus/:id/add/watched/:anime_id
+  def remove_from_watched_list
+
+    @otaku = Finder.find_otaku_by_id params[:id]
+    anime = Anime.get_anime params[:anime_id]
+
+    @otaku = remove_from_list @otaku, 'watched_list', anime
+  end
+
+  # Adds an anime to an otaku's watching list
+  # POST /otakus/:id/add/watching/:anime_id
+  def remove_from_watching_list
+
+    @otaku = Finder.find_otaku_by_id params[:id]
+    anime = Anime.get_anime params[:anime_id]
+
+    @otaku = remove_from_list @otaku, 'watching_list', anime
+  end
 
   private
-  def add_to_list(otaku,list,anime)
+  def add_to_list(otaku, list, anime)
     err = false
 
     if anime.size > 0 and otaku.size > 0
@@ -106,5 +133,31 @@ class OtakusController < ApplicationController
     return otaku
 
   end
+
+  def remove_from_list(otaku, list, anime)
+    err = false
+
+    if anime.size > 0 and otaku.size > 0
+      otaku = otaku.first
+      anime = anime.first
+
+      otaku.send(list.to_sym).delete anime
+
+      if otaku.save!
+        render json: otaku
+      else
+        err = true
+      end
+    else
+      err = true;
+    end
+
+    head :no_content if err
+
+    return otaku
+
+  end
+
+
 
 end
