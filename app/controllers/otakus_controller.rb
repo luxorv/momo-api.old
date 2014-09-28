@@ -51,8 +51,28 @@ class OtakusController < ApplicationController
     head :no_content
   end
 
+  # Rates an anime
+  # POST /otakus/:id/rate/:anime_id
+  def rate_anime
+    @otaku = Finder.find_otaku_by_id params[:id]
+    anime = Anime.get_anime params[:anime_id]
+    value = params[:value].to_i
+
+    if @otaku.size > 0 and anime.size > 0 and value > 0
+      rate = {anime_rate: {:value => value , :anime_id => anime.first.id, :otaku_id => @otaku.first.id} }
+      rate = Pusher.create_anime_rate rate
+      binding.pry
+      render json: rate, status: :created, location: rate
+    else
+      head :no_content
+    end
+
+
+  end
+
+
   # Adds an anime to an otaku's watch list
-  # POST /otakus/:id/add/watch/:anime_id
+  # POST /otakus/:id/watch/:anime_id
   def add_to_watch_list
     @otaku = Finder.find_otaku_by_id params[:id]
     anime = Anime.get_anime params[:anime_id]
@@ -61,7 +81,7 @@ class OtakusController < ApplicationController
   end
 
   # Adds an anime to an otaku's watched list
-  # POST /otakus/:id/add/watched/:anime_id
+  # POST /otakus/:id/watched/:anime_id
   def add_to_watched_list
 
     @otaku = Finder.find_otaku_by_id params[:id]
@@ -71,7 +91,7 @@ class OtakusController < ApplicationController
   end
 
   # Adds an anime to an otaku's watching list
-  # POST /otakus/:id/add/watching/:anime_id
+  # POST /otakus/:id/watching/:anime_id
   def add_to_watching_list
 
     @otaku = Finder.find_otaku_by_id params[:id]
@@ -81,7 +101,7 @@ class OtakusController < ApplicationController
   end
 
   # Adds an anime to an otaku's watch list
-  # POST /otakus/:id/add/watch/:anime_id
+  # POST /otakus/:id/watch/:anime_id
   def remove_from_watch_list
     @otaku = Finder.find_otaku_by_id params[:id]
     anime = Anime.get_anime params[:anime_id]
@@ -90,7 +110,7 @@ class OtakusController < ApplicationController
   end
 
   # Adds an anime to an otaku's watched list
-  # POST /otakus/:id/add/watched/:anime_id
+  # POST /otakus/:id/watched/:anime_id
   def remove_from_watched_list
 
     @otaku = Finder.find_otaku_by_id params[:id]
@@ -100,7 +120,7 @@ class OtakusController < ApplicationController
   end
 
   # Adds an anime to an otaku's watching list
-  # POST /otakus/:id/add/watching/:anime_id
+  # POST /otakus/:id/watching/:anime_id
   def remove_from_watching_list
 
     @otaku = Finder.find_otaku_by_id params[:id]

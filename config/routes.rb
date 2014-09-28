@@ -16,6 +16,8 @@ Momo::Application.routes.draw do
     put    '/otakus' => 'devise/registrations#update'
     delete '/otakus' => 'devise/registrations#destroy'
 
+    post   '/otakus/:id/rate/:anime_id' => 'otakus#rate_anime'
+
     post   '/otakus/:id/watch/:anime_id' => 'otakus#add_to_watch_list'
     post   '/otakus/:id/watched/:anime_id' => 'otakus#add_to_watched_list'
     post   '/otakus/:id/watching/:anime_id' => 'otakus#add_to_watching_list'
