@@ -50,24 +50,24 @@ RSpec.describe OtakusController, :type => :controller do
   # OtakusController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET index" do
-    it "assigns all otakus as @otakus" do
+  describe 'GET index' do
+    it 'assigns all otakus as @otakus' do
       otaku = Otaku.all.to_json
       get :index, {}, valid_session
       expect(assigns(:otakus).to_json).to eq(otaku)
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested otaku as @otaku" do
+  describe 'GET show' do
+    it 'assigns the requested otaku as @otaku' do
       otaku = Otaku.create! valid_attributes
       get :show, {:id => otaku.to_param}, valid_session
       expect(assigns(:otaku).first).to eq(otaku)
     end
   end
 
-  describe "POST create" do
-    it "should create a new otaku with Pusher" do
+  describe 'POST create' do
+    it 'should create a new otaku with Pusher' do
 
       params = {:otaku => valid_attributes}
       params = params.merge auth_params
@@ -84,7 +84,7 @@ RSpec.describe OtakusController, :type => :controller do
       expect(otaku.errors.size).to  eq(0)
     end
 
-    it "should fail creating a new otaku with Pusher" do
+    it 'should fail creating a new otaku with Pusher' do
 
       params = {:not_otaku => valid_attributes}
       params = params.merge auth_params
@@ -98,12 +98,52 @@ RSpec.describe OtakusController, :type => :controller do
     end
   end
 
-  describe "PUT update" do
-    it "should update an otaku with Pusher" do
+  describe 'POST lists' do
+
+    it 'should add anime to watch list' do
+      anime = Anime.first
+      params = {:otaku_id => Otaku.first.id, :anime_id => anime.id}
+
+      post :add_to_watch_list, params, valid_session
+
+      otaku = assigns(:otaku)
+
+      expect(otaku).to be_an(Otaku)
+      expect(otaku.watch_list.last).to eql(anime)
+    end
+
+    it 'should add anime to watching list' do
+      anime = Anime.first
+      params = {:otaku_id => Otaku.first.id, :anime_id => anime.id}
+
+      post :add_to_watching_list, params, valid_session
+
+      otaku = assigns(:otaku)
+
+      expect(otaku).to be_an(Otaku)
+      expect(otaku.watching_list.last).to eql(anime)
+    end
+
+    it 'should add anime to watched list' do
+      anime = Anime.first
+      params = {:otaku_id => Otaku.first.id, :anime_id => anime.id}
+
+      post :add_to_watched_list, params, valid_session
+
+      otaku = assigns(:otaku)
+
+      expect(otaku).to be_an(Otaku)
+      expect(otaku.watched_list.last).to eql(anime)
+    end
+
+  end
+
+  describe 'PUT update' do
+    it 'should update an otaku with Pusher' do
 
       id = Otaku.first.id;
       attrs = valid_attributes
-      attrs[:name] = "Name #{Time.now.to_s}"
+      attrs[:name] =  "Name #{Time.now.to_s}"
       params = {:id => id, :otaku => attrs}
       params = params.merge auth_params
 
@@ -120,7 +160,7 @@ RSpec.describe OtakusController, :type => :controller do
       expect(otaku.errors.size).to  eq(0)
     end
 
-    it "should fail updating an otaku with Pusher" do
+    it 'should fail updating an otaku with Pusher' do
 
       id = Otaku.first.id;
       attrs = valid_attributes
@@ -139,8 +179,8 @@ RSpec.describe OtakusController, :type => :controller do
     end
   end
 
-  describe "DELETE destroy" do
-    it "should delete an otaku with Pusher" do
+  describe 'DELETE destroy' do
+    it 'should delete an otaku with Pusher' do
 
       otaku = Otaku.first
       params = {:id => otaku.id}
@@ -152,6 +192,7 @@ RSpec.describe OtakusController, :type => :controller do
     end
 
   end
+
 
 
 end

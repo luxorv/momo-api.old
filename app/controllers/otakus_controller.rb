@@ -52,6 +52,7 @@ class OtakusController < ApplicationController
   end
 
   # Adds an anime to an otaku's watch list
+  # POST /otakus/add/watch
   def add_to_watch_list
 
     @otaku = Finder.find_otaku_by_id params[:otaku_id]
@@ -67,6 +68,7 @@ class OtakusController < ApplicationController
   end
 
   # Adds an anime to an otaku's watched list
+  # POST /otakus/add/watched
   def add_to_watched_list
 
     @otaku = Finder.find_otaku_by_id params[:otaku_id]
@@ -82,6 +84,7 @@ class OtakusController < ApplicationController
   end
 
   # Adds an anime to an otaku's watching list
+  # POST /otakus/add/watching
   def add_to_watching_list
 
     @otaku = Finder.find_otaku_by_id params[:otaku_id]
